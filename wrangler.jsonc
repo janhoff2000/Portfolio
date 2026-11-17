@@ -1,0 +1,14 @@
+// Cloudflare Workers configuration. `wrangler` (Cloudflare's command-line tool) reads this file.
+// Docs: https://developers.cloudflare.com/workers/wrangler/configuration/
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // The Worker's name in your Cloudflare dashboard and in its default URL: portfolio.<your-subdomain>.workers.dev
+  "name": "portfolio",
+  // Pins the Workers runtime behaviour to this date so future Cloudflare changes can't break the site
+  "compatibility_date": "2026-11-17",
+  // Serve the built site (Vite's dist/ folder) as static files
+  "assets": {
+    // Any unknown URL returns index.html, so React can decide which page to show
+    "not_found_handling": "single-page-application",
+  },
+}
