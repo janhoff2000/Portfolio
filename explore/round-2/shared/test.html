@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phone test</title>
+<link rel="stylesheet" href="phone.css">
+<style>
+  body { margin: 0; background: #e9e9ec; display: grid; place-items: center; min-height: 100vh; font: 14px system-ui; }
+  .frame { width: 340px; padding: 12px; background: #1c1c1e; border-radius: 64px; }
+  .debug .mrp-hot { background: rgba(255, 0, 80, 0.18); outline: 1px solid rgba(255, 0, 80, 0.6); }
+</style></head>
+<body class="debug">
+  <div class="frame"><div id="phone"></div></div>
+  <script src="phone.js"></script>
+  <script>window.p = new MyReciPalPhone(document.getElementById('phone'), { base: '../../../public/images/myrecipal/proto/' });</script>
+</body></html>

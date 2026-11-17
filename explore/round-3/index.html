@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore, round 3</title>
+<style>
+  :root { --bg: #f2f2ef; --ink: #1d1d1b; --rule: #d6d6d0; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 12px 24px; background: var(--bg); border-bottom: 1px solid var(--rule); }
+  header button { min-height: 36px; padding: 0 14px; border: 1px solid var(--ink); border-radius: 6px; background: transparent; font: inherit; cursor: pointer; color: var(--ink); }
+  header button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  header .gap { width: 16px; }
+  section { padding: 24px; border-bottom: 1px solid var(--rule); }
+  h2 { margin: 0 0 4px; font-size: 20px; } p { margin: 0 0 16px; max-width: 80ch; }
+  .frames { display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 24px; align-items: start; }
+  iframe { width: 100%; height: 860px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; }
+  iframe.phone { height: 844px; }
+  a { color: inherit; }
+  @media (max-width: 900px) { .frames { grid-template-columns: minmax(0, 1fr); } }
+</style></head>
+<body>
+<header>
+  <strong>Motion</strong>
+  <button type="button" data-level="none" aria-pressed="false">None</button>
+  <button type="button" data-level="subtle" aria-pressed="true">Subtle</button>
+  <button type="button" data-level="expressive" aria-pressed="false">Expressive</button>
+  <span class="gap"></span>
+  <strong>Language</strong>
+  <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  <button type="button" data-lang="de" aria-pressed="false">DE</button>
+</header>
+<section>
+  <h2>Tour: the left side steers the app</h2>
+  <p>The app icon, a short headline and one sentence. Then the app's screens as a list: clicking "Shopping list" or "A recipe" takes the phone there, and when you tap inside the phone, the matching item lights up. The tech details sit under "How it's built". ReviewRadar works the same way with My PRs and Reviews. <a href="a/index.html?left=tour#myrecipal" target="_blank">Open on its own</a></p>
+  <div class="frames"><iframe src="a/index.html?left=tour" title="Tour, desktop"></iframe><iframe class="phone" src="a/index.html?left=tour" title="Tour, phone"></iframe></div>
+</section>
+<section>
+  <h2>Tiles: features as small cards</h2>
+  <p>The same opening, then the four things that matter as white cards with icons (offline, sync, on-device import, Share Extension), and the tech stack as chips underneath. Calmer, more like an Apple feature grid. <a href="a/index.html?left=tiles#myrecipal" target="_blank">Open on its own</a></p>
+  <div class="frames"><iframe src="a/index.html?left=tiles" title="Tiles, desktop"></iframe><iframe class="phone" src="a/index.html?left=tiles" title="Tiles, phone"></iframe></div>
+</section>
+<script>
+  document.querySelectorAll('header button[data-level]').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('header button[data-level]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll('iframe').forEach((f) => { const u = new URL(f.src, location.href); u.searchParams.set('motion', b.dataset.level); f.src = u.pathname + u.search; });
+  }));
+  document.querySelectorAll('header button[data-lang]').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('header button[data-lang]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    try { localStorage.setItem('lang', b.dataset.lang); } catch (e) {}
+    document.querySelectorAll('iframe').forEach((f) => { f.src = f.src; });
+  }));
+</script>
+</body></html>

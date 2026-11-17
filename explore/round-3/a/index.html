@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jan Hoffmann, iOS and full-stack developer</title>
+<meta name="description" content="Jan Hoffmann, iOS and full-stack developer in Münster. Use MyReciPal and ReviewRadar right on this page.">
+<script>
+  const level = new URLSearchParams(location.search).get('motion') || 'subtle';
+  document.documentElement.dataset.motion = ['none', 'subtle', 'expressive'].includes(level) ? level : 'subtle';
+  const left = new URLSearchParams(location.search).get('left');
+  document.documentElement.dataset.left = left === 'tiles' ? 'tiles' : 'tour';
+</script>
+<link rel="stylesheet" href="../../round-2/shared/phone.css">
+<link rel="stylesheet" href="../../round-2/shared/timeline.css">
+<style>
+  :root {
+    --bg: #fbfbfd; --bg-2: #f2f2f5; --ink: #1d1d1f; --ink-2: #6e6e73; --rule: #d2d2d7;
+    --mrp: #c94d22; --rr: #0a66d6; --focus: #0a66d6;
+    --tl-ink: #1d1d1f; --tl-ink-2: #6e6e73; --tl-rule: #d2d2d7; --tl-surface: #fbfbfd; --tl-work: #0a66d6; --tl-project: #c94d22; --tl-edu: #86868b;
+    --gutter: clamp(16px, 5vw, 64px);
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+  button { font: inherit; color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 10; background: rgba(251, 251, 253, 0.8); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+  .nav .wrap { display: flex; align-items: center; gap: 24px; height: 52px; font-size: 14px; }
+  .nav .who { font-weight: 600; text-decoration: none; margin-right: auto; font-size: 15px; }
+  .nav a:not(.who) { text-decoration: none; color: var(--ink-2); }
+  .nav a:not(.who):hover { color: var(--ink); }
+  .lang { display: flex; gap: 2px; }
+  .lang button { background: none; border: 0; padding: 4px 8px; min-height: 32px; border-radius: 6px; cursor: pointer; color: var(--ink-2); font-size: 13px; }
+  .lang button[aria-pressed="true"] { color: var(--ink); background: rgba(0, 0, 0, 0.06); }
+
+  /* Hero */
+  .hero { text-align: center; padding: clamp(56px, 9vw, 120px) 0 clamp(40px, 6vw, 72px); }
+  .hero img { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; margin: 0 auto 24px; }
+  .hero h1 { margin: 0 auto; font-size: clamp(40px, 6.4vw, 80px); line-height: 1.05; font-weight: 700; letter-spacing: -0.035em; max-width: 14ch; }
+  .hero .sub { margin: 20px auto 0; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.38; color: var(--ink-2); max-width: 32ch; letter-spacing: -0.015em; }
+  .hero .status { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; padding: 8px 14px; border-radius: 999px; background: var(--bg-2); font-size: 14px; }
+  .hero .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2fb350; }
+  .cta { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 999px; font-size: 16px; font-weight: 500; text-decoration: none; }
+  .btn.primary { background: var(--ink); color: #fff; }
+  .btn.link { color: var(--rr); padding: 0 8px; }
+  .btn.link::after { content: " ›"; }
+
+  /* Project sections */
+  .project { padding: clamp(64px, 9vw, 120px) 0; }
+  .project.alt { background: var(--bg-2); }
+  .project .grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .eyeline { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .eyeline img { width: 52px; height: 52px; border-radius: 12px; }
+  .eyeline .meta { font-size: 14px; color: var(--ink-2); line-height: 1.3; }
+  .eyeline .meta strong { display: block; color: var(--ink); font-size: 17px; }
+  .project h2 { margin: 0; font-size: clamp(32px, 4vw, 52px); line-height: 1.08; font-weight: 700; letter-spacing: -0.03em; max-width: 16ch; }
+  .project .lede { margin: 18px 0 0; font-size: 19px; color: var(--ink-2); max-width: 40ch; }
+  .facts { list-style: none; margin: 28px 0 0; padding: 0; max-width: 46ch; }
+  .facts li { padding: 12px 0; border-top: 1px solid var(--rule); font-size: 16px; }
+  .facts li strong { font-weight: 600; }
+  .note { margin: 18px 0 0; font-size: 14px; color: var(--ink-2); max-width: 46ch; }
+  .project .btn { margin-top: 26px; }
+  .btn.btn-mrp { background: var(--mrp); color: #fff; }
+  .btn.rr { background: var(--rr); color: #fff; }
+
+  /* Device */
+  .device { width: clamp(270px, 26vw, 330px); position: sticky; top: 72px; align-self: start; }
+  .panel-wrap { position: sticky; top: 72px; align-self: start; }
+  .hint { margin-top: 16px; text-align: center; font-size: 13px; color: var(--ink-2); }
+
+  /* ReviewRadar panel */
+  .panel-wrap { width: 400px; max-width: 100%; }
+  .panel { width: 100%; position: relative; border-radius: 14px; overflow: hidden; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08); }
+  .panel img { width: 100%; }
+  .panel .hot { position: absolute; border: 0; background: transparent; cursor: pointer; border-radius: 8px; }
+  .look { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+  .look button { border: 1px solid var(--rule); background: #fff; border-radius: 999px; padding: 0 14px; min-height: 36px; cursor: pointer; font-size: 14px; }
+  .look button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* Left side, round 3 */
+  .app-id { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .app-id img { width: 60px; height: 60px; border-radius: 14px; }
+  .app-id div { display: flex; flex-direction: column; line-height: 1.3; }
+  .app-id strong { font-size: 19px; font-weight: 600; }
+  .app-id span { font-size: 14px; color: var(--ink-2); }
+  .project h2 { max-width: 15ch; font-size: clamp(32px, 3.6vw, 46px); }
+  .project .lede { font-size: 18px; }
+  html[data-left="tiles"] .v-tour, html[data-left="tour"] .v-tiles { display: none; }
+  .tiles { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 520px; }
+  .tiles.three { grid-template-columns: minmax(0, 1fr); max-width: 440px; }
+  .tiles li { background: #fff; border-radius: 18px; padding: 18px; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06); display: flex; flex-direction: column; gap: 4px; }
+  .tiles.three li { display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 14px; row-gap: 2px; align-items: start; }
+  .tiles.three li svg { grid-row: span 2; margin: 2px 0 0; }
+  .project:not(.alt) .tiles li { background: var(--bg-2); box-shadow: none; }
+  .tiles svg { width: 26px; height: 26px; margin-bottom: 8px; color: var(--accent, var(--ink)); }
+  .tiles strong { font-size: 16px; font-weight: 600; }
+  .tiles span { font-size: 14px; color: var(--ink-2); line-height: 1.4; }
+  #myrecipal { --accent: var(--mrp); }
+  #reviewradar { --accent: var(--rr); }
+  .tour { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; max-width: 480px; }
+  .tour button { width: 100%; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 14px; align-items: start; text-align: left; padding: 14px 16px; border: 0; border-radius: 16px; background: transparent; cursor: pointer; transition: background-color 0.2s; }
+  .tour button:hover { background: rgba(0, 0, 0, 0.04); }
+  .tour button[aria-pressed="true"] { background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 6px 18px rgba(0, 0, 0, 0.05); }
+  .project:not(.alt) .tour button[aria-pressed="true"] { background: var(--bg-2); box-shadow: none; }
+  .tour svg { width: 24px; height: 24px; margin-top: 1px; color: var(--ink-2); }
+  .tour button[aria-pressed="true"] svg { color: var(--accent); }
+  .tour strong { display: block; font-size: 16px; font-weight: 600; }
+  .tour span span { display: block; font-size: 14px; color: var(--ink-2); line-height: 1.4; margin-top: 2px; }
+  .built { margin: 18px 0 0; max-width: 480px; }
+  .built summary { cursor: pointer; font-size: 15px; font-weight: 500; color: var(--accent); padding: 8px 16px; list-style: none; }
+  .built summary::-webkit-details-marker { display: none; }
+  .built summary::after { content: " ›"; display: inline-block; transition: transform 0.2s; }
+  .built[open] summary::after { transform: rotate(90deg); }
+  .built .facts { margin: 6px 16px 0; }
+  .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 22px 0 0; padding: 0; max-width: 520px; }
+  .chips li { padding: 4px 10px; border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--ink-2); background: rgba(0, 0, 0, 0.05); }
+  @media (max-width: 560px) { .tiles { grid-template-columns: minmax(0, 1fr); } }
+
+  .exp { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .exp-head { position: sticky; top: 84px; }
+  @media (max-width: 860px) { .exp { grid-template-columns: minmax(0, 1fr); } .exp-head { position: static; } }
+  footer { padding: 32px 0 48px; font-size: 12px; color: var(--ink-2); border-top: 1px solid var(--rule); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html[data-motion="subtle"] .hero > *, html[data-motion="expressive"] .hero > * { animation: rise 0.7s var(--ease) both; }
+    html[data-motion="subtle"] .hero > :nth-child(2), html[data-motion="expressive"] .hero > :nth-child(2) { animation-delay: 0.06s; }
+    html[data-motion="subtle"] .hero > :nth-child(3), html[data-motion="expressive"] .hero > :nth-child(3) { animation-delay: 0.12s; }
+    html[data-motion="subtle"] .hero > :nth-child(n+4), html[data-motion="expressive"] .hero > :nth-child(n+4) { animation-delay: 0.18s; }
+    html[data-motion="expressive"] .panel { transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+    html[data-motion="expressive"] .panel.out { opacity: 0; transform: translateY(48px); }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+  @media (max-width: 860px) {
+    .nav a:not(.who) { display: none; }
+    .project .grid { grid-template-columns: minmax(0, 1fr); }
+    .device, .panel-wrap { justify-self: center; }
+  }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="who" href="#">Jan Hoffmann</a>
+    <a href="#myrecipal">MyReciPal</a>
+    <a href="#reviewradar">ReviewRadar</a>
+    <a href="#experience" data-i18n="navExp">Experience</a>
+    <a href="mailto:me@jandavidhoffmann.com" data-i18n="navMail">Contact</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="de" aria-pressed="false">DE</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" aria-labelledby="h1">
+    <img src="../../../public/images/portrait/portrait-wall.webp" width="1000" height="1241" alt="Jan Hoffmann">
+    <h1 id="h1" data-i18n="h1">iOS and full-stack developer.</h1>
+    <p class="sub" data-i18n="sub">I'm Jan. I build the CHECK24 hotel app and its React and Go web app, and two apps of my own. Both are below, and you can use them right here.</p>
+    <p class="status" data-i18n="status">Open to full-remote roles, CET</p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:me@jandavidhoffmann.com" data-i18n="mail">Email me</a>
+      <a class="btn link" href="https://www.linkedin.com/in/jan-hoffmann-1a473022a">LinkedIn</a>
+    </div>
+  </section>
+
+  <section class="project alt" id="myrecipal" aria-labelledby="mrp-h">
+    <div class="wrap grid">
+      <div class="left">
+        <div class="app-id"><img src="../../../public/images/icons/myrecipal.webp" width="240" height="240" alt=""><div><strong>MyReciPal</strong><span data-i18n="mrpMeta">iPhone, beta on TestFlight</span></div></div>
+        <h2 id="mrp-h" data-i18n="mrpH3">Recipes from TikTok, ready to cook.</h2>
+        <p class="lede" data-i18n="mrpLede3">Save a recipe from a post or any website. MyReciPal pulls out the ingredients and steps and builds the shopping list.</p>
+        <div class="v-tiles">
+          <ul class="tiles">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg><strong data-i18n="m1h">Offline first</strong><span data-i18n="m1">SwiftData with seven versioned schemas and migrations.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-13.7 5.7"/><path d="M4 12a8 8 0 0 1 13.7-5.7"/><path d="M18 3v4h-4"/><path d="M6 21v-4h4"/></svg><strong data-i18n="m2h">Two-way sync</strong><span data-i18n="m2">Laravel API and PostgreSQL, conflicts settled by version.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg><strong data-i18n="m3h">On-device import</strong><span data-i18n="m3">Apple's Foundation Models, a server model as fallback.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg><strong data-i18n="m4h">Share Extension</strong><span data-i18n="m4">Save a recipe straight from Instagram or TikTok.</span></li>
+          </ul>
+        </div>
+        <div class="v-tour">
+          <ul class="tour" id="mrpTour" aria-label="Screens">
+            <li><button type="button" data-tab="cookbook" data-path="list" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg><span><strong data-i18n="s1h">Cookbook</strong><span data-i18n="s1">Every saved recipe in one place, also offline.</span></span></button></li>
+            <li><button type="button" data-tab="cookbook" data-path="list,r-g-ing" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span><strong data-i18n="s2h">A recipe</strong><span data-i18n="s2">Imported from a TikTok post: ingredients, servings and the creator.</span></span></button></li>
+            <li><button type="button" data-tab="cookbook" data-path="list,r-g-ins" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg><span><strong data-i18n="s3h">Steps</strong><span data-i18n="s3">Instructions keep the sections from the original.</span></span></button></li>
+            <li><button type="button" data-tab="shopping" data-path="shop" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg><span><strong data-i18n="s4h">Shopping list</strong><span data-i18n="s4">Ingredients from the recipes you plan to cook.</span></span></button></li>
+          </ul>
+          <details class="built"><summary data-i18n="built">How it's built</summary>
+            <ul class="facts">
+              <li data-i18n="mrp1"><strong>SwiftUI and SwiftData</strong>, offline first, with seven versioned schemas and migrations.</li>
+              <li data-i18n="mrp2"><strong>Laravel API</strong> with two-way background sync to PostgreSQL, conflicts settled by version.</li>
+              <li data-i18n="mrp3"><strong>Recipe import</strong> on the phone with Apple's Foundation Models, a server model as fallback.</li>
+              <li data-i18n="mrp4"><strong>Share Extension</strong>, so a recipe can be saved straight from Instagram or TikTok.</li>
+            </ul>
+          </details>
+        </div>
+        <ul class="chips" aria-label="Built with"><li>SwiftUI</li><li>SwiftData</li><li>Foundation Models</li><li>Laravel</li><li>PostgreSQL</li></ul>
+        <p class="note" data-i18n="mrpNote">It reads the caption or the web page. If the steps only live in the video, it won't invent them.</p>
+        <a class="btn btn-mrp" href="https://testflight.apple.com/join/MbgnEzdk" data-i18n="mrpBeta">Join the beta on TestFlight</a>
+      </div>
+      <figure class="device" style="margin:0">
+        <div class="iphone"><div class="screen"><div id="phone" aria-label="Interactive MyReciPal demo"></div></div><img src="../../../public/images/bezel/iphone-18-pro-silver.webp" width="1350" height="2760" alt="iPhone 18 Pro"></div>
+        <figcaption class="hint" data-i18n="hint">Tap, scroll and go back. These are the app's real screens, with sample recipes.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="project" id="reviewradar" aria-labelledby="rr-h">
+    <div class="wrap grid">
+      <div class="left">
+        <div class="app-id"><img src="../../../public/images/icons/reviewradar.webp" width="240" height="240" alt=""><div><strong>ReviewRadar</strong><span data-i18n="rrMeta">Mac menu bar, beta on TestFlight</span></div></div>
+        <h2 id="rr-h" data-i18n="rrH3">The pull requests waiting on me, in the menu bar.</h2>
+        <p class="lede" data-i18n="rrLede3">GitHub, Bitbucket and Jira in one panel, sorted into what can be merged and what needs work.</p>
+        <div class="v-tiles">
+          <ul class="tiles three">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"/></svg><strong data-i18n="r1h">Reviewer suggestions</strong><span data-i18n="r1">From local git history and each person's open reviews.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg><strong data-i18n="r2h">Ticket summaries</strong><span data-i18n="r2">Written on the Mac with Apple's on-device model.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><strong data-i18n="r3h">Notifications</strong><span data-i18n="r3">For new review requests and PRs ready to merge.</span></li>
+          </ul>
+        </div>
+        <div class="v-tour">
+          <ul class="tour" id="rrTour" aria-label="Views">
+            <li><button type="button" data-scope="mine" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="12" r="2"/><path d="M6 7v10M6 7c0 4 4 5 10 5"/></svg><span><strong data-i18n="v1h">My PRs</strong><span data-i18n="v1">Ready to merge or needs work, with builds, approvals, tasks and new comments.</span></span></button></li>
+            <li><button type="button" data-scope="reviews" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span><strong data-i18n="v2h">Reviews</strong><span data-i18n="v2">What others asked me to review, and what I already reviewed.</span></span></button></li>
+          </ul>
+          <details class="built"><summary data-i18n="built">How it's built</summary>
+            <ul class="facts">
+              <li data-i18n="rr1"><strong>Reviewer suggestions</strong> from local git history and each person's open reviews.</li>
+              <li data-i18n="rr2"><strong>Ticket summaries</strong> on the Mac with Apple's on-device model.</li>
+              <li data-i18n="rr3"><strong>Notifications</strong> for new review requests and PRs ready to merge.</li>
+            </ul>
+          </details>
+        </div>
+        <ul class="chips" aria-label="Built with"><li>Swift</li><li>SwiftUI</li><li>Foundation Models</li><li>GitHub API</li><li>Bitbucket API</li><li>Jira API</li></ul>
+        <p class="note" data-i18n="rrNote">Swift and SwiftUI for macOS 26.6. The panel shows the app's own sample data.</p>
+        <a class="btn rr" href="https://testflight.apple.com/join/aDbNgHKU" data-i18n="rrBeta">Join the beta on TestFlight</a>
+      </div>
+      <div class="panel-wrap">
+        <div class="panel" id="rrPanel">
+          <img id="rrImg" src="../../../public/images/reviewradar/rr-mine-light.webp" width="800" height="1228" alt="ReviewRadar panel with sample pull requests">
+          <button type="button" class="hot" data-scope="mine" style="left:3%;top:8.3%;width:47%;height:4.6%" aria-label="My PRs"></button>
+          <button type="button" class="hot" data-scope="reviews" style="left:50%;top:8.3%;width:47%;height:4.6%" aria-label="Reviews"></button>
+        </div>
+        <div class="look" role="group" aria-label="Appearance">
+          <button type="button" data-look="light" aria-pressed="true" data-i18n="light">Light</button>
+          <button type="button" data-look="dark" aria-pressed="false" data-i18n="dark">Dark</button>
+        </div>
+        <p class="hint" data-i18n="rrHint">Switch between My PRs and Reviews in the panel.</p>
+      </div>
+    </div>
+  </section>
+  <section class="project alt" id="experience" aria-labelledby="exp-h">
+    <div class="wrap exp">
+      <div class="exp-head">
+        <h2 id="exp-h" data-i18n="expH">Three years at CHECK24, from apprentice to full stack.</h2>
+        <p class="lede" data-i18n="expLede">Work, my own projects and school on one line, newest first.</p>
+      </div>
+      <div id="timeline"></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap" data-i18n="credits">Recipes, creators and food photos in the MyReciPal screens are samples. Food photos, creator avatars and the portrait's background were generated with fal.ai.</div></footer>
+
+<script src="../../round-2/shared/phone.js"></script>
+<script src="../../round-2/shared/timeline.js"></script>
+<script>
+  const dict = { en: {}, de: {
+    navMail: 'Kontakt',
+    mrpH3: 'Rezepte von TikTok, bereit zum Kochen.',
+    mrpLede3: 'Ein Rezept aus einem Post oder von einer Website speichern. MyReciPal holt Zutaten und Schritte heraus und erstellt die Einkaufsliste.',
+    m1h: 'Offline zuerst', m1: 'SwiftData mit sieben versionierten Schemas und Migrationen.',
+    m2h: 'Sync in beide Richtungen', m2: 'Laravel-API und PostgreSQL, Konflikte löst eine Versionsnummer.',
+    m3h: 'Import auf dem Gerät', m3: 'Apples Foundation Models, ein Server-Modell als Ausweichlösung.',
+    m4h: 'Share Extension', m4: 'Ein Rezept direkt aus Instagram oder TikTok speichern.',
+    s1h: 'Kochbuch', s1: 'Alle gespeicherten Rezepte an einem Ort, auch offline.',
+    s2h: 'Ein Rezept', s2: 'Aus einem TikTok-Post importiert: Zutaten, Portionen und der Creator.',
+    s3h: 'Schritte', s3: 'Die Anleitung behält die Abschnitte aus dem Original.',
+    s4h: 'Einkaufsliste', s4: 'Zutaten aus den Rezepten, die man kochen will.',
+    built: 'So ist es gebaut',
+    rrH3: 'Die Pull Requests, die auf mich warten, in der Menüleiste.',
+    rrLede3: 'GitHub, Bitbucket und Jira in einem Panel, sortiert nach „kann gemergt werden“ und „braucht Arbeit“.',
+    r1h: 'Reviewer-Vorschläge', r1: 'Aus der lokalen Git-Historie und den offenen Reviews jeder Person.',
+    r2h: 'Ticket-Zusammenfassungen', r2: 'Direkt auf dem Mac geschrieben, mit Apples On-Device-Modell.',
+    r3h: 'Mitteilungen', r3: 'Bei neuen Review-Anfragen und PRs, die gemergt werden können.',
+    v1h: 'Meine PRs', v1: 'Bereit zum Mergen oder braucht Arbeit, mit Builds, Approvals, Tasks und neuen Kommentaren.',
+    v2h: 'Reviews', v2: 'Wo andere mich um ein Review gebeten haben, und was ich schon reviewt habe.',
+    navExp: 'Erfahrung',
+    expH: 'Drei Jahre bei CHECK24, vom Azubi bis Full Stack.',
+    expLede: 'Arbeit, eigene Projekte und Ausbildung auf einer Linie, das Neueste zuerst.',
+    h1: 'iOS- und Full-Stack-Entwickler.',
+    sub: 'Ich bin Jan. Ich arbeite an der Hotel-App von CHECK24 und ihrer Web-App mit React und Go, und an zwei eigenen Apps. Beide stehen unten, und man kann sie direkt hier bedienen.',
+    status: 'Offen für Remote-Stellen, MEZ',
+    mail: 'E-Mail schreiben',
+    mrpMeta: 'iPhone, Beta in TestFlight',
+    mrpH: 'Rezepte von TikTok und Instagram, die Einkaufsliste einen Tipp entfernt.',
+    mrpLede: 'Die App speichert Rezepte aus Posts und von jeder Website in einer Sammlung, aus der man wirklich kocht.',
+    mrp1: '<strong>SwiftUI und SwiftData</strong>, offline zuerst, mit sieben versionierten Schemas und Migrationen.',
+    mrp2: '<strong>Laravel-API</strong> mit Hintergrund-Sync in beide Richtungen zu PostgreSQL, Konflikte löst eine Versionsnummer.',
+    mrp3: '<strong>Rezept-Import</strong> auf dem iPhone mit Apples Foundation Models, ein Server-Modell als Ausweichlösung.',
+    mrp4: '<strong>Share Extension</strong>, damit ein Rezept direkt aus Instagram oder TikTok gespeichert wird.',
+    mrpNote: 'Die App liest die Bildunterschrift oder die Webseite. Stehen die Schritte nur im Video, erfindet sie keine.',
+    mrpBeta: 'Beta in TestFlight beitreten',
+    hint: 'Tippen, scrollen, zurückgehen. Das sind die echten Screens der App, mit Beispielrezepten.',
+    rrMeta: 'Mac-Menüleiste, Beta in TestFlight',
+    rrH: 'Jeder Pull Request, der auf mich wartet, einen Klick entfernt in der Menüleiste.',
+    rrLede: 'GitHub, Bitbucket und Jira in einem Panel: was gemergt werden kann, was Arbeit braucht und wo ich um ein Review gebeten wurde.',
+    rr1: '<strong>Reviewer-Vorschläge</strong> aus der lokalen Git-Historie und den offenen Reviews jeder Person.',
+    rr2: '<strong>Ticket-Zusammenfassungen</strong> direkt auf dem Mac, mit Apples On-Device-Modell.',
+    rr3: '<strong>Mitteilungen</strong> bei neuen Review-Anfragen und PRs, die gemergt werden können.',
+    rrNote: 'Swift und SwiftUI für macOS 26.6. Das Panel zeigt die Beispieldaten der App.',
+    rrBeta: 'Beta in TestFlight beitreten',
+    light: 'Hell', dark: 'Dunkel',
+    rrHint: 'Im Panel zwischen „My PRs“ und „Reviews“ wechseln.',
+    credits: 'Rezepte, Creator und Food-Fotos in den MyReciPal-Screens sind Beispiele. Food-Fotos, Creator-Avatare und der Hintergrund des Porträts wurden mit fal.ai erzeugt.'
+  } };
+  document.querySelectorAll('[data-i18n]').forEach((el) => { dict.en[el.dataset.i18n] = el.innerHTML; });
+  let phone, timeline;
+  function setLang(l) {
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach((el) => { const v = dict[l][el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+    document.querySelectorAll('[data-lang-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.langBtn === l)));
+    if (phone) phone.lang = l;
+    if (timeline) timeline.setLang(l);
+    try { localStorage.setItem('lang', l); } catch (e) {}
+  }
+  let lang = null; try { lang = localStorage.getItem('lang'); } catch (e) {}
+  if (lang !== 'en' && lang !== 'de') lang = (navigator.languages || [navigator.language]).some((x) => /^de\b/i.test(x)) ? 'de' : 'en';
+  setLang(lang);
+  document.querySelectorAll('[data-lang-btn]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.langBtn)));
+
+  const reduce = document.documentElement.dataset.motion === 'none';
+  const mrpSteps = [...document.querySelectorAll('#mrpTour button')];
+  const stepFor = (id) => id === 'shop' ? 3 : /-ins$/.test(id) ? 2 : /^r-/.test(id) ? 1 : 0;
+  phone = new MyReciPalPhone(document.getElementById('phone'), { base: '../../../public/images/myrecipal/proto/', lang, reduceMotion: reduce || undefined,
+    onChange: ({ id }) => { const k = stepFor(id); mrpSteps.forEach((b, i) => b.setAttribute('aria-pressed', String(i === k))); } });
+  mrpSteps.forEach((b) => b.addEventListener('click', () => phone.goTo(b.dataset.tab, b.dataset.path.split(','))));
+
+  timeline = new ExperienceTimeline(document.getElementById('timeline'), lang);
+
+  const rr = { scope: 'mine', look: 'light' }; const rrImg = document.getElementById('rrImg');
+  const rrSet = () => { rrImg.src = `../../../public/images/reviewradar/rr-${rr.scope}-${rr.look}.webp`; };
+  const rrSteps = [...document.querySelectorAll('#rrTour button')];
+  const rrScope = (sc) => { rr.scope = sc; rrSet(); rrSteps.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.scope === sc))); };
+  document.querySelectorAll('#rrPanel .hot').forEach((b) => b.addEventListener('click', () => rrScope(b.dataset.scope)));
+  rrSteps.forEach((b) => b.addEventListener('click', () => rrScope(b.dataset.scope)));
+  document.querySelectorAll('[data-look]').forEach((b) => b.addEventListener('click', () => { rr.look = b.dataset.look; document.querySelectorAll('[data-look]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); rrSet(); }));
+
+  if (document.documentElement.dataset.motion === 'expressive' && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const els = document.querySelectorAll('.panel'); els.forEach((e) => e.classList.add('out'));
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.remove('out'); io.unobserve(e.target); } }), { threshold: 0.25 });
+    els.forEach((e) => io.observe(e));
+  }
+</script>
+</body>
+</html>

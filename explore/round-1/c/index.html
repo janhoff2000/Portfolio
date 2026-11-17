@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jan Hoffmann, a letter</title>
+<meta name="description" content="Jan Hoffmann, iOS and full-stack developer in Münster, and the two apps he built for himself.">
+<script>
+  const level = new URLSearchParams(location.search).get('motion') || 'subtle';
+  document.documentElement.dataset.motion = ['none', 'subtle', 'expressive'].includes(level) ? level : 'subtle';
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground: oklch(0.255 0.045 258);
+    --ground-2: oklch(0.29 0.05 258);
+    --ink: oklch(0.95 0.012 85);
+    --ink-soft: oklch(0.78 0.02 250);
+    --accent: oklch(0.82 0.13 78);
+    --focus: oklch(0.82 0.13 78);
+    --gutter: clamp(16px, 5vw, 80px);
+    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font: 18px/1.6 "Onest", system-ui, sans-serif; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+  button { font: inherit; color: inherit; }
+  .serif { font-family: "Gloock", Georgia, serif; font-weight: 400; }
+
+  .top { display: flex; align-items: center; gap: 18px; padding: 22px var(--gutter); font-size: 15px; }
+  .top .who { margin-right: auto; text-decoration: none; font-family: "Gloock", Georgia, serif; font-size: 20px; }
+  .lang { display: flex; gap: 2px; }
+  .lang button { background: none; border: 0; padding: 4px 10px; min-height: 36px; border-radius: 999px; cursor: pointer; color: var(--ink-soft); }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+
+  /* The letter */
+  .letter { position: relative; padding: clamp(20px, 4vw, 48px) var(--gutter) clamp(60px, 8vw, 120px); max-width: 1440px; margin: 0 auto; }
+  .letter .portrait { float: right; width: clamp(220px, 34vw, 500px); margin: -40px calc(var(--gutter) * -1) 24px 40px; -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 46%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse closest-side at 50% 46%, #000 62%, transparent 100%); }
+  .letter h1 { margin: 0; font-family: "Gloock", Georgia, serif; font-weight: 400; font-size: clamp(40px, 6.4vw, 104px); line-height: 1.02; letter-spacing: -0.015em; max-width: 13ch; }
+  .letter h1 em { font-style: normal; color: var(--accent); }
+  .body { font-family: "Gloock", Georgia, serif; font-size: clamp(21px, 2vw, 28px); line-height: 1.4; max-width: 36ch; margin: clamp(24px, 3vw, 40px) 0 0; }
+  .body p { margin: 0 0 0.8em; }
+  .sign { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 28px; font-size: 17px; }
+  .sign .name { font-family: "Gloock", Georgia, serif; font-size: 34px; color: var(--accent); margin-right: 8px; }
+  .sign a { text-underline-offset: 4px; }
+  .btn { display: inline-flex; align-items: center; min-height: 46px; padding: 0 20px; border-radius: 999px; background: var(--accent); color: oklch(0.22 0.04 258); text-decoration: none; font-weight: 600; }
+  .clear { clear: both; }
+
+  /* Apps */
+  .apps { overflow-x: clip; background: var(--ground-2); padding: clamp(60px, 8vw, 120px) var(--gutter); }
+  .apps h2 { margin: 0 auto; max-width: 1280px; font-family: "Gloock", Georgia, serif; font-weight: 400; font-size: clamp(34px, 4.6vw, 68px); line-height: 1.05; }
+  .app { max-width: 1280px; margin: clamp(48px, 6vw, 88px) auto 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+  .app h3 { margin: 0; font-family: "Gloock", Georgia, serif; font-weight: 400; font-size: clamp(30px, 3vw, 44px); }
+  .app h3 small { display: block; font-family: "Onest", sans-serif; font-size: 16px; color: var(--ink-soft); margin-top: 6px; }
+  .quote { margin: 22px 0; padding: 0; font-family: "Gloock", Georgia, serif; font-size: clamp(20px, 1.7vw, 24px); line-height: 1.45; }
+  .quote::before { content: "“"; color: var(--accent); }
+  .quote::after { content: "”"; color: var(--accent); }
+  .app p { margin: 0 0 14px; max-width: 52ch; }
+  .app .limit { color: var(--ink-soft); }
+  .fan { position: relative; height: clamp(420px, 44vw, 600px); }
+  .fan img { position: absolute; top: 0; left: 50%; width: clamp(170px, 17vw, 250px); border-radius: 26px; box-shadow: 0 30px 60px oklch(0.1 0.04 258 / 0.55); }
+  .fan img:nth-child(1) { transform: translateX(-130%) rotate(-7deg) translateY(36px); }
+  .fan img:nth-child(2) { transform: translateX(-50%); z-index: 2; }
+  .fan img:nth-child(3) { transform: translateX(30%) rotate(7deg) translateY(36px); }
+  .rr .shot { justify-self: center; width: min(100%, 400px); border-radius: 14px; overflow: hidden; box-shadow: 0 30px 60px oklch(0.1 0.04 258 / 0.55); }
+
+  footer { padding: 28px var(--gutter) 48px; font-size: 13px; color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html[data-motion="subtle"] .reveal, html[data-motion="expressive"] .reveal { animation: up 0.8s var(--ease-out) both; animation-delay: calc(var(--d, 0) * 120ms); }
+    html[data-motion="subtle"] .portrait, html[data-motion="expressive"] .portrait { animation: fade 1.2s ease-out both; }
+    html[data-motion="expressive"] .fan img { transition: transform 0.9s cubic-bezier(0.2, 0.9, 0.2, 1); }
+    html[data-motion="expressive"] .fan:not(.open) img:nth-child(1),
+    html[data-motion="expressive"] .fan:not(.open) img:nth-child(3) { transform: translateX(-50%) rotate(0deg); }
+  }
+  @keyframes up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 860px) {
+    .letter .portrait { float: none; width: min(100%, 360px); margin: 0 0 24px auto; }
+    .app { grid-template-columns: minmax(0, 1fr); }
+    .fan { height: 440px; }
+    .fan img { width: 150px; }
+    .fan img:nth-child(1) { transform: translateX(-120%) rotate(-7deg) translateY(30px); }
+    .fan img:nth-child(3) { transform: translateX(20%) rotate(7deg) translateY(30px); }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="who" href="#">Jan Hoffmann</a>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang-btn="de" aria-pressed="false">DE</button>
+  </div>
+</header>
+
+<main>
+  <section class="letter" aria-labelledby="hello">
+    <img class="portrait" src="../../../public/images/portrait/portrait-navy.webp" width="1000" height="1241" alt="Jan Hoffmann" data-slot="portrait" data-alt="Head-and-shoulders portrait of Jan on a navy backdrop">
+    <h1 id="hello" class="reveal" data-i18n="h1">I'm Jan, an iOS and full-stack developer in <em>Münster</em>.</h1>
+    <div class="body">
+      <p class="reveal" style="--d:1" data-i18n="p1">For three years I have worked at CHECK24, most of that time on an iOS app used by millions. Since June I have been on the rewrite of the hotel comparison in React and Go, live since October.</p>
+      <p class="reveal" style="--d:2" data-i18n="p2">After work I build my own apps. Two are in beta, and their main screens are on this page, so there is nothing to install.</p>
+      <p class="reveal" style="--d:3" data-i18n="p3">I'm looking for a full-remote role, frontend-leaning full stack or iOS, on CET.</p>
+    </div>
+    <div class="sign reveal" style="--d:4">
+      <span class="name">Jan</span>
+      <a class="btn" href="mailto:me@jandavidhoffmann.com" data-i18n="mail">Write to me</a>
+      <a href="https://www.linkedin.com/in/jan-hoffmann-1a473022a">LinkedIn</a>
+    </div>
+    <div class="clear"></div>
+  </section>
+
+  <section class="apps" aria-labelledby="apps">
+    <h2 id="apps" data-i18n="apps">Two apps of my own, both in beta</h2>
+
+    <article class="app mrp">
+      <div>
+        <h3>MyReciPal <small data-i18n="mrpKind">Recipe app for iPhone, beta on TestFlight</small></h3>
+        <blockquote class="quote" data-i18n="quote">Every recipe meant reopening Instagram, digging to my saved folder, finding the right post, and reading the caption while the video played. My phone would lock and I would start over.</blockquote>
+        <p data-i18n="mrp1">So MyReciPal saves recipes from TikTok, Instagram and any website into one library and builds the shopping list with one tap. SwiftUI and SwiftData on the phone, a Laravel API behind it, and two-way sync with PostgreSQL that settles conflicts by version.</p>
+        <p class="limit" data-i18n="limit">It reads the caption or the web page. If the steps only live in the video, it won't invent them.</p>
+        <p><a class="btn" href="https://testflight.apple.com/join/MbgnEzdk" data-i18n="mrpBeta">Join the MyReciPal beta</a></p>
+      </div>
+      <div class="fan" id="fan">
+        <img src="../../../public/images/myrecipal/recipes.webp" width="603" height="1311" alt="MyReciPal cookbook with sample recipes" loading="lazy">
+        <img src="../../../public/images/myrecipal/detail.webp" width="603" height="1311" alt="Recipe detail with creator and ingredients" loading="lazy">
+        <img src="../../../public/images/myrecipal/shopping.webp" width="603" height="1311" alt="Shopping list" loading="lazy">
+      </div>
+    </article>
+
+    <article class="app rr">
+      <div>
+        <h3>ReviewRadar <small data-i18n="rrKind">Menu bar app for the Mac, beta on TestFlight</small></h3>
+        <p data-i18n="rr1">ReviewRadar shows the pull requests waiting on me across GitHub, Bitbucket and Jira: what is ready to merge, what needs work, and what others asked me to review.</p>
+        <p data-i18n="rr2">It suggests reviewers from local git history and current review load, and summarises the Jira ticket on the Mac with Apple's on-device model.</p>
+        <p class="limit" data-i18n="rrNote">The screen shows sample data from the app's preview mode.</p>
+        <p><a class="btn" href="https://testflight.apple.com/join/aDbNgHKU" data-i18n="rrBeta">Join the ReviewRadar beta</a></p>
+      </div>
+      <div class="shot"><img src="../../../public/images/reviewradar/rr-reviews-dark.webp" width="800" height="1228" alt="ReviewRadar panel, reviews tab, dark mode, sample data" loading="lazy"></div>
+    </article>
+  </section>
+</main>
+
+<footer data-credits data-i18n="credits">Recipes, creators and food photos in the MyReciPal screens are samples. The food photos, creator avatars and the portrait's backdrop were generated with fal.ai.</footer>
+
+<script>
+  const dict = {
+    en: {},
+    de: {
+      h1: 'Ich bin Jan, iOS- und Full-Stack-Entwickler in <em>Münster</em>.',
+      p1: 'Seit drei Jahren arbeite ich bei CHECK24, die meiste Zeit an einer iOS-App mit Millionen Nutzern. Seit Juni baue ich am neuen Hotelvergleich mit React und Go mit, live seit Oktober.',
+      p2: 'Nach Feierabend baue ich eigene Apps. Zwei davon sind in der Beta, und ihre wichtigsten Screens stehen auf dieser Seite. Installieren muss man nichts.',
+      p3: 'Ich suche eine Remote-Stelle: Full Stack mit Frontend-Schwerpunkt oder iOS, Zeitzone MEZ.',
+      mail: 'Mir schreiben',
+      apps: 'Zwei eigene Apps, beide in der Beta',
+      mrpKind: 'Rezept-App fürs iPhone, Beta in TestFlight',
+      quote: 'Für jedes Rezept musste ich Instagram wieder öffnen, mich zu den Gespeicherten durchklicken, den richtigen Beitrag finden und die Bildunterschrift lesen, während das Video lief. Mein Telefon sperrte sich und ich fing von vorn an.',
+      mrp1: 'Also speichert MyReciPal Rezepte von TikTok, Instagram und jeder Website in einer Sammlung und erstellt die Einkaufsliste mit einem Tipp. SwiftUI und SwiftData auf dem iPhone, dahinter eine Laravel-API, Sync in beide Richtungen mit PostgreSQL, Konflikte löst eine Versionsnummer.',
+      limit: 'MyReciPal liest die Bildunterschrift oder die Webseite. Stehen die Schritte nur im Video, erfindet es keine.',
+      mrpBeta: 'MyReciPal-Beta beitreten',
+      rrKind: 'Menüleisten-App für den Mac, Beta in TestFlight',
+      rr1: 'ReviewRadar zeigt die Pull Requests, die auf mich warten, aus GitHub, Bitbucket und Jira: was gemergt werden kann, was Arbeit braucht und wo andere mich um ein Review gebeten haben.',
+      rr2: 'Die App schlägt Reviewer aus der lokalen Git-Historie und der aktuellen Review-Last vor und fasst das Jira-Ticket direkt auf dem Mac zusammen, mit Apples On-Device-Modell.',
+      rrNote: 'Der Screen zeigt Beispieldaten aus dem Vorschaumodus der App.',
+      rrBeta: 'ReviewRadar-Beta beitreten',
+      credits: 'Rezepte, Creator und Food-Fotos in den MyReciPal-Screens sind Beispiele. Food-Fotos, Creator-Avatare und der Hintergrund des Porträts wurden mit fal.ai erzeugt.'
+    }
+  };
+  document.querySelectorAll('[data-i18n]').forEach((el) => { dict.en[el.dataset.i18n] = el.innerHTML; });
+  function setLang(l) {
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach((el) => { const v = dict[l][el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+    document.querySelectorAll('[data-lang-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.langBtn === l)));
+    try { localStorage.setItem('lang', l); } catch (e) {}
+  }
+  let lang = null;
+  try { lang = localStorage.getItem('lang'); } catch (e) {}
+  if (lang !== 'en' && lang !== 'de') lang = (navigator.languages || [navigator.language]).some((x) => /^de\b/i.test(x)) ? 'de' : 'en';
+  setLang(lang);
+  document.querySelectorAll('[data-lang-btn]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.langBtn)));
+
+  // Expressive: the phones fan out when the section comes into view
+  const fan = document.getElementById('fan');
+  if (document.documentElement.dataset.motion === 'expressive' && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    new IntersectionObserver((entries, obs) => { entries.forEach((e) => { if (e.isIntersecting) { fan.classList.add('open'); obs.disconnect(); } }); }, { threshold: 0.4 }).observe(fan);
+  } else {
+    fan.classList.add('open');
+  }
+</script>
+</body>
+</html>

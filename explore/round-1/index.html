@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore, round 1</title>
+<style>
+  :root { --bg: #f2f2ef; --ink: #1d1d1b; --rule: #d6d6d0; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding: 12px 24px; background: var(--bg); border-bottom: 1px solid var(--rule); }
+  header button { min-height: 36px; padding: 0 14px; border: 1px solid var(--ink); border-radius: 6px; background: transparent; font: inherit; cursor: pointer; color: var(--ink); }
+  header button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  header .gap { width: 16px; }
+  section { padding: 24px; border-bottom: 1px solid var(--rule); }
+  h2 { margin: 0 0 4px; font-size: 20px; } p { margin: 0 0 16px; max-width: 80ch; }
+  .frames { display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 24px; align-items: start; }
+  iframe { width: 100%; height: 820px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; }
+  iframe.phone { height: 844px; }
+  a { color: inherit; }
+  @media (max-width: 900px) { .frames { grid-template-columns: minmax(0, 1fr); } }
+</style></head>
+<body>
+<header>
+  <strong>Motion</strong>
+  <button type="button" data-level="none" aria-pressed="false">None</button>
+  <button type="button" data-level="subtle" aria-pressed="true">Subtle</button>
+  <button type="button" data-level="expressive" aria-pressed="false">Expressive</button>
+  <span class="gap"></span>
+  <strong>Language</strong>
+  <button type="button" data-lang="en" aria-pressed="false">EN</button>
+  <button type="button" data-lang="de" aria-pressed="false">DE</button>
+</header>
+
+<section>
+  <h2>A: The page is the demo</h2>
+  <p>Nobody installs a beta. MyReciPal's real screens switch on a phone beside your name, and the "3" in the dark bar at the top opens the real ReviewRadar panel, the way it drops from the Mac menu bar. Warm grey ground, heavy expanded Archivo, MyReciPal's orange. <a href="a/index.html" target="_blank">Open on its own</a></p>
+  <div class="frames"><iframe src="a/index.html" title="Direction A, desktop"></iframe><iframe class="phone" src="a/index.html" title="Direction A, phone"></iframe></div>
+</section>
+
+<section>
+  <h2>B: The changelog</h2>
+  <p>Your work as release notes, newest first, from real dates and your own commit messages: ReviewRadar, MyReciPal, the CHECK24 rewrite, then the iOS years. Cool white, Spline Sans Mono for dates and headings, status colours borrowed from ReviewRadar. <a href="b/index.html" target="_blank">Open on its own</a></p>
+  <div class="frames"><iframe src="b/index.html" title="Direction B, desktop"></iframe><iframe class="phone" src="b/index.html" title="Direction B, phone"></iframe></div>
+</section>
+
+<section>
+  <h2>C: A letter</h2>
+  <p>You write to the reader. A large serif letter with your portrait fading into a navy ground, then "two apps of my own", with the MyReciPal story in your own words. Gloock and Onest, saffron from the food photos. <a href="c/index.html" target="_blank">Open on its own</a></p>
+  <div class="frames"><iframe src="c/index.html" title="Direction C, desktop"></iframe><iframe class="phone" src="c/index.html" title="Direction C, phone"></iframe></div>
+</section>
+
+<script>
+  document.querySelectorAll('header button[data-level]').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('header button[data-level]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll('iframe').forEach((f) => { const u = new URL(f.src, location.href); u.searchParams.set('motion', b.dataset.level); f.src = u.pathname + u.search; });
+  }));
+  document.querySelectorAll('header button[data-lang]').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('header button[data-lang]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    try { localStorage.setItem('lang', b.dataset.lang); } catch (e) {}
+    document.querySelectorAll('iframe').forEach((f) => { f.src = f.src; });
+  }));
+</script>
+</body></html>

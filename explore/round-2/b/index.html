@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jan Hoffmann, iOS and full-stack developer</title>
+<meta name="description" content="Jan Hoffmann, iOS and full-stack developer in Münster. Use MyReciPal and ReviewRadar right on this page.">
+<script>
+  const level = new URLSearchParams(location.search).get('motion') || 'subtle';
+  document.documentElement.dataset.motion = ['none', 'subtle', 'expressive'].includes(level) ? level : 'subtle';
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/phone.css">
+<link rel="stylesheet" href="../shared/timeline.css">
+<style>
+  :root {
+    --bg: #0e0f11; --card: #17181b; --card-2: #1e2024; --ink: #f4f4f5; --ink-2: #a1a1aa; --rule: #2a2c31;
+    --mrp: #e8673a; --rr: #4c9bff; --ok: #39c27a; --focus: #4c9bff;
+    --tl-ink: #f4f4f5; --tl-ink-2: #a1a1aa; --tl-rule: #2f3137; --tl-surface: #17181b; --tl-work: #4c9bff; --tl-project: #ff8a5c; --tl-edu: #a1a1aa;
+    --gutter: clamp(16px, 4vw, 48px);
+    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; color-scheme: dark; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 "Manrope", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
+  button { font: inherit; color: inherit; }
+
+  .layout { display: grid; grid-template-columns: minmax(280px, 360px) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); max-width: 1320px; margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* Profile column */
+  .profile { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; padding: clamp(28px, 5vh, 56px) 0; }
+  .profile img { width: 88px; height: 88px; border-radius: 22px; object-fit: cover; object-position: 50% 15%; }
+  .profile h1 { margin: 22px 0 0; font-size: 34px; line-height: 1.1; font-weight: 800; letter-spacing: -0.03em; }
+  .profile .role { margin: 6px 0 0; font-size: 18px; color: var(--ink-2); font-weight: 500; }
+  .profile .bio { margin: 22px 0 0; color: var(--ink-2); max-width: 34ch; }
+  .status { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font-size: 14px; font-weight: 600; }
+  .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(57, 194, 122, 0.18); }
+  .links { display: flex; flex-direction: column; gap: 4px; margin-top: 26px; }
+  .links a { display: flex; justify-content: space-between; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 12px; background: var(--card); text-decoration: none; font-weight: 600; font-size: 15px; }
+  .links a span { color: var(--ink-2); font-weight: 500; font-size: 13px; }
+  .links a:hover { background: var(--card-2); }
+  .jump { margin-top: auto; display: flex; flex-direction: column; gap: 2px; padding-top: 24px; font-size: 14px; }
+  .jump a { text-decoration: none; color: var(--ink-2); padding: 6px 0; }
+  .jump a:hover { color: var(--ink); }
+  .lang { display: flex; gap: 4px; margin-top: 16px; }
+  .lang button { background: none; border: 1px solid var(--rule); padding: 4px 10px; min-height: 32px; border-radius: 8px; cursor: pointer; color: var(--ink-2); font-size: 13px; }
+  .lang button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink-2); }
+
+  /* Work column */
+  .work { padding: clamp(28px, 5vh, 56px) 0 64px; display: flex; flex-direction: column; gap: 20px; }
+  .card { background: var(--card); border-radius: 28px; padding: clamp(24px, 3.4vw, 44px); border: 1px solid var(--rule); }
+  .card-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(24px, 3.5vw, 56px); align-items: start; }
+  .tagrow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--card-2); color: var(--ink-2); }
+  .pill.beta { color: #ffb38f; background: rgba(232, 103, 58, 0.14); }
+  .pill.beta.rr { color: #9cc6ff; background: rgba(76, 155, 255, 0.14); }
+  .card h2 { margin: 16px 0 0; font-size: clamp(28px, 2.8vw, 38px); line-height: 1.12; font-weight: 800; letter-spacing: -0.025em; max-width: 18ch; }
+  .card .lede { margin: 14px 0 0; color: var(--ink-2); font-size: 17px; max-width: 42ch; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 22px 0 0; padding: 0; list-style: none; }
+  .stack li { padding: 5px 10px; border-radius: 8px; border: 1px solid var(--rule); font-size: 13px; font-weight: 600; color: var(--ink); }
+  .points { margin: 22px 0 0; padding: 0; list-style: none; max-width: 46ch; }
+  .points li { padding: 10px 0 10px 18px; position: relative; color: var(--ink-2); }
+  .points li::before { content: ""; position: absolute; left: 0; top: 1.15em; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-2); }
+  .points li strong { color: var(--ink); font-weight: 700; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-top: 24px; }
+  .btn.btn-mrp { background: var(--mrp); color: #1a0c06; }
+  .btn.rr { background: var(--rr); color: #04101f; }
+
+  .device { width: clamp(250px, 22vw, 310px); }
+  .hint { margin: 14px 0 0; text-align: center; font-size: 13px; color: var(--ink-2); }
+
+  .panel-wrap { width: 320px; max-width: 100%; }
+  .panel { width: 100%; position: relative; border-radius: 14px; overflow: hidden; box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08); }
+  .panel .hot { position: absolute; border: 0; background: transparent; cursor: pointer; border-radius: 8px; }
+
+  .timeline { margin: 18px 0 0; padding: 0; list-style: none; }
+  .timeline li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-top: 1px solid var(--rule); }
+  .timeline time { color: var(--ink-2); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .timeline strong { display: block; font-weight: 700; }
+  .timeline span { color: var(--ink-2); font-size: 15px; }
+  .card h3 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+
+  footer { font-size: 12px; color: var(--ink-2); padding: 0 4px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html[data-motion="subtle"] .profile > *, html[data-motion="expressive"] .profile > * { animation: rise 0.6s var(--ease) both; }
+    html[data-motion="subtle"] .work > :first-child, html[data-motion="expressive"] .work > * { animation: rise 0.7s 0.12s var(--ease) both; }
+    html[data-motion="expressive"] .work > :nth-child(2) { animation-delay: 0.2s; }
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  @media (max-width: 1100px) { .card-grid { grid-template-columns: minmax(0, 1fr); } .device, .panel-wrap { justify-self: center; } }
+  @media (max-width: 820px) {
+    .layout { grid-template-columns: minmax(0, 1fr); }
+    .profile { position: static; height: auto; padding-bottom: 0; }
+    .jump { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="profile" aria-labelledby="name">
+    <img src="../../../public/images/portrait/portrait-navy.webp" width="1000" height="1241" alt="Jan Hoffmann">
+    <h1 id="name">Jan Hoffmann</h1>
+    <p class="role" data-i18n="role">iOS and full-stack developer</p>
+    <p class="bio" data-i18n="bio">Three years at CHECK24 in Münster: the hotel iOS app, then its rewrite in React and Go. In my own time I build iOS and Mac apps; try two of them on the right.</p>
+    <p class="status" data-i18n="status">Open to full-remote roles, CET</p>
+    <nav class="links" aria-label="Contact">
+      <a href="mailto:me@jandavidhoffmann.com" data-i18n="mail">Email <span>me@jandavidhoffmann.com</span></a>
+      <a href="https://www.linkedin.com/in/jan-hoffmann-1a473022a">LinkedIn <span>jan-hoffmann</span></a>
+    </nav>
+    <nav class="jump" aria-label="Sections">
+      <a href="#myrecipal">MyReciPal</a>
+      <a href="#reviewradar">ReviewRadar</a>
+      <a href="#work" data-i18n="jumpWork">Experience</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang-btn="de" aria-pressed="false">DE</button>
+    </div>
+  </aside>
+
+  <main class="work">
+    <article class="card" id="myrecipal" aria-labelledby="mrp-h">
+      <div class="card-grid">
+        <div>
+          <div class="tagrow"><span class="pill">MyReciPal</span><span class="pill beta" data-i18n="mrpPill">iPhone beta</span></div>
+          <h2 id="mrp-h" data-i18n="mrpH">Saves recipes from TikTok and Instagram and builds the shopping list.</h2>
+          <p class="lede" data-i18n="mrpLede">A recipe library for the things you save and never cook. The phone on the right runs on the app's real screens.</p>
+          <ul class="stack" aria-label="Built with"><li>SwiftUI</li><li>SwiftData</li><li>Foundation Models</li><li>Laravel</li><li>PostgreSQL</li></ul>
+          <ul class="points">
+            <li data-i18n="mrp1"><strong>Offline first</strong>, with two-way background sync and conflicts settled by version.</li>
+            <li data-i18n="mrp2"><strong>On-device import</strong> that turns a caption into ingredients and steps, with a server model as fallback.</li>
+            <li data-i18n="mrp3"><strong>Seven SwiftData schema versions</strong>, migrated in place.</li>
+            <li data-i18n="mrp4"><strong>One limit:</strong> if the steps only live in the video, it won't invent them.</li>
+          </ul>
+          <a class="btn btn-mrp" href="https://testflight.apple.com/join/MbgnEzdk" data-i18n="mrpBeta">Join the TestFlight beta</a>
+        </div>
+        <figure class="device" style="margin:0">
+          <div class="iphone"><div class="screen"><div id="phone" aria-label="Interactive MyReciPal demo"></div></div><img src="../../../public/images/bezel/iphone-18-pro-black.webp" width="1350" height="2760" alt="iPhone 18 Pro"></div>
+          <figcaption class="hint" data-i18n="hint">Tap a recipe, scroll, go back.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="card" id="reviewradar" aria-labelledby="rr-h">
+      <div class="card-grid">
+        <div>
+          <div class="tagrow"><span class="pill">ReviewRadar</span><span class="pill beta rr" data-i18n="rrPill">Mac beta</span></div>
+          <h2 id="rr-h" data-i18n="rrH">A menu bar app for the pull requests waiting on me.</h2>
+          <p class="lede" data-i18n="rrLede">GitHub, Bitbucket and Jira in one panel, sorted into what is ready to merge and what needs work.</p>
+          <ul class="stack" aria-label="Built with"><li>Swift</li><li>SwiftUI</li><li>Foundation Models</li><li>GitHub API</li><li>Bitbucket API</li><li>Jira API</li></ul>
+          <ul class="points">
+            <li data-i18n="rr1"><strong>Reviewer suggestions</strong> from local git history and current review load.</li>
+            <li data-i18n="rr2"><strong>Ticket summaries</strong> on the Mac with Apple's on-device model.</li>
+            <li data-i18n="rr3"><strong>Notifications</strong> for review requests and PRs ready to merge.</li>
+          </ul>
+          <a class="btn rr" href="https://testflight.apple.com/join/aDbNgHKU" data-i18n="rrBeta">Join the TestFlight beta</a>
+        </div>
+        <div class="panel-wrap">
+          <div class="panel" id="rrPanel">
+            <img id="rrImg" src="../../../public/images/reviewradar/rr-mine-dark.webp" width="800" height="1228" alt="ReviewRadar panel with sample pull requests, dark mode">
+            <button type="button" class="hot" data-scope="mine" style="left:3%;top:8.3%;width:47%;height:4.6%" aria-label="My PRs"></button>
+            <button type="button" class="hot" data-scope="reviews" style="left:50%;top:8.3%;width:47%;height:4.6%" aria-label="Reviews"></button>
+          </div>
+          <p class="hint" data-i18n="rrHint">Switch between My PRs and Reviews. Sample data.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" id="work" aria-labelledby="work-h">
+      <h3 id="work-h" data-i18n="workH">Experience</h3>
+      <p class="lede" data-i18n="workLede">Three years at CHECK24, from apprentice to full stack, next to my own projects and school.</p>
+      <div id="timeline" style="margin-top:24px"></div>
+    </article>
+
+    <footer data-i18n="credits">Recipes, creators and food photos in the MyReciPal screens are samples. Food photos, creator avatars and the portrait's backdrop were generated with fal.ai.</footer>
+  </main>
+</div>
+
+<script src="../shared/phone.js"></script>
+<script src="../shared/timeline.js"></script>
+<script>
+  const dict = { en: {}, de: {
+    role: 'iOS- und Full-Stack-Entwickler',
+    bio: 'Drei Jahre bei CHECK24 in Münster: erst die Hotel-App für iOS, dann ihr Rewrite mit React und Go. In meiner Freizeit baue ich Apps für iPhone und Mac; zwei davon lassen sich rechts ausprobieren.',
+    status: 'Offen für Remote-Stellen, MEZ',
+    mail: 'E-Mail <span>me@jandavidhoffmann.com</span>',
+    jumpWork: 'Erfahrung',
+    mrpPill: 'iPhone-Beta',
+    mrpH: 'Speichert Rezepte von TikTok und Instagram und erstellt die Einkaufsliste.',
+    mrpLede: 'Eine Sammlung für die Rezepte, die man speichert und nie kocht. Das iPhone rechts läuft mit den echten Screens der App.',
+    mrp1: '<strong>Offline zuerst</strong>, mit Hintergrund-Sync in beide Richtungen, Konflikte löst eine Versionsnummer.',
+    mrp2: '<strong>Import auf dem Gerät</strong>: Aus einer Bildunterschrift werden Zutaten und Schritte, ein Server-Modell springt ein, wenn nötig.',
+    mrp3: '<strong>Sieben SwiftData-Schemaversionen</strong>, direkt migriert.',
+    mrp4: '<strong>Eine Grenze:</strong> Stehen die Schritte nur im Video, erfindet die App keine.',
+    mrpBeta: 'TestFlight-Beta beitreten',
+    hint: 'Rezept antippen, scrollen, zurück.',
+    rrPill: 'Mac-Beta',
+    rrH: 'Eine Menüleisten-App für die Pull Requests, die auf mich warten.',
+    rrLede: 'GitHub, Bitbucket und Jira in einem Panel, sortiert nach „bereit zum Mergen“ und „braucht Arbeit“.',
+    rr1: '<strong>Reviewer-Vorschläge</strong> aus der lokalen Git-Historie und der aktuellen Review-Last.',
+    rr2: '<strong>Ticket-Zusammenfassungen</strong> direkt auf dem Mac, mit Apples On-Device-Modell.',
+    rr3: '<strong>Mitteilungen</strong> bei Review-Anfragen und PRs, die gemergt werden können.',
+    rrBeta: 'TestFlight-Beta beitreten',
+    rrHint: 'Zwischen „My PRs“ und „Reviews“ wechseln. Beispieldaten.',
+    workH: 'Erfahrung',
+    workLede: 'Drei Jahre bei CHECK24, vom Azubi bis Full Stack, dazu eigene Projekte und die Ausbildung.',
+    credits: 'Rezepte, Creator und Food-Fotos in den MyReciPal-Screens sind Beispiele. Food-Fotos, Creator-Avatare und der Hintergrund des Porträts wurden mit fal.ai erzeugt.'
+  } };
+  document.querySelectorAll('[data-i18n]').forEach((el) => { dict.en[el.dataset.i18n] = el.innerHTML; });
+  let phone, timeline;
+  function setLang(l) {
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach((el) => { const v = dict[l][el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+    document.querySelectorAll('[data-lang-btn]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.langBtn === l)));
+    if (phone) phone.lang = l;
+    if (timeline) timeline.setLang(l);
+    try { localStorage.setItem('lang', l); } catch (e) {}
+  }
+  let lang = null; try { lang = localStorage.getItem('lang'); } catch (e) {}
+  if (lang !== 'en' && lang !== 'de') lang = (navigator.languages || [navigator.language]).some((x) => /^de\b/i.test(x)) ? 'de' : 'en';
+  setLang(lang);
+  document.querySelectorAll('[data-lang-btn]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.langBtn)));
+
+  const reduce = document.documentElement.dataset.motion === 'none';
+  phone = new MyReciPalPhone(document.getElementById('phone'), { base: '../../../public/images/myrecipal/proto/', lang, reduceMotion: reduce || undefined });
+
+  timeline = new ExperienceTimeline(document.getElementById('timeline'), lang);
+  const rrImg = document.getElementById('rrImg');
+  document.querySelectorAll('#rrPanel .hot').forEach((b) => b.addEventListener('click', () => { rrImg.src = `../../../public/images/reviewradar/rr-${b.dataset.scope}-dark.webp`; }));
+</script>
+</body>
+</html>

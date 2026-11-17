@@ -1,0 +1,199 @@
+{
+  "collections": [
+    { "name": "Weeknight dinners", "recipes": ["Crispy Gochujang Chicken", "Miso Butter Mushroom Udon", "Smash Burger Tacos", "Baked Feta Orzo"] },
+    { "name": "Slow Sundays", "recipes": ["Lemon Ricotta Pancakes", "Shakshuka with Feta"] }
+  ],
+  "shopping": [
+    ["Chicken thighs", 600, "g", "boneless, skin on"],
+    ["Gochujang", 3, "tbsp", null],
+    ["Spring onions", 4, "pcs", null],
+    ["Cucumber", 1, "pcs", null],
+    ["Jasmine rice", 300, "g", null],
+    ["Udon noodles", 400, "g", "frozen"],
+    ["Oyster mushrooms", 250, "g", null]
+  ],
+  "recipes": [
+    {
+      "title": "Crispy Gochujang Chicken",
+      "duration": 35, "servings": 3, "daysAgo": 1,
+      "image": "gochujang.jpg",
+      "sourceUrl": "https://www.tiktok.com/@demo.noodle.nights/video/7301234567890123456",
+      "author": { "name": "demo.noodle.nights", "platform": "tiktok", "avatar": "avatar-noodle.png" },
+      "ingredients": [
+        { "title": "Chicken", "items": [
+          ["Chicken thighs", 600, "g", "boneless, skin on"],
+          ["Cornstarch", 2, "tbsp", null],
+          ["Salt", 1, "tsp", null]
+        ]},
+        { "title": "Glaze", "items": [
+          ["Gochujang", 3, "tbsp", null],
+          ["Honey", 2, "tbsp", null],
+          ["Soy sauce", 1, "tbsp", null],
+          ["Rice vinegar", 1, "tbsp", null],
+          ["Garlic", 3, "pcs", "cloves, grated"]
+        ]},
+        { "title": "To serve", "items": [
+          ["Jasmine rice", 300, "g", null],
+          ["Spring onions", 2, "pcs", "thinly sliced"],
+          ["Sesame seeds", 1, "tsp", "toasted"],
+          ["Cucumber", 1, "pcs", "sliced"]
+        ]}
+      ],
+      "steps": [
+        { "title": "Crisp the chicken", "steps": [
+          "Pat the chicken dry and toss with cornstarch and salt.",
+          "Fry skin side down in a hot pan for 8 minutes until deep golden, then flip and cook 5 minutes more."
+        ]},
+        { "title": "Glaze", "steps": [
+          "Whisk gochujang, honey, soy sauce, rice vinegar and garlic.",
+          "Pour off most of the fat, add the glaze and toss for 1 minute until sticky.",
+          "Slice and serve over rice with spring onions, sesame and cucumber."
+        ]}
+      ]
+    },
+    {
+      "title": "Baked Feta Orzo",
+      "duration": 40, "servings": 4, "daysAgo": 3,
+      "image": "fetaorzo.jpg",
+      "sourceUrl": "https://www.instagram.com/p/C9xKitchenLea/",
+      "author": { "name": "demo.lea.cooks", "platform": "instagram", "avatar": "avatar-lea.png" },
+      "ingredients": [
+        { "title": "", "items": [
+          ["Orzo", 250, "g", null],
+          ["Cherry tomatoes", 400, "g", null],
+          ["Feta", 200, "g", "one block"],
+          ["Vegetable stock", 600, "mL", "hot"],
+          ["Olive oil", 3, "tbsp", null],
+          ["Garlic", 2, "pcs", "cloves, sliced"],
+          ["Lemon", 1, "pcs", "zest only"],
+          ["Basil", null, null, "a handful"]
+        ]}
+      ],
+      "steps": [
+        { "title": "", "steps": [
+          "Heat the oven to 200°C.",
+          "Put tomatoes, garlic and olive oil in a baking dish, set the feta in the middle and bake 20 minutes.",
+          "Stir in the orzo and hot stock, bake 15 minutes more until the orzo is tender.",
+          "Break up the feta, stir it through and finish with lemon zest and basil."
+        ]}
+      ]
+    },
+    {
+      "title": "Shakshuka with Feta",
+      "duration": 30, "servings": 2, "daysAgo": 6,
+      "image": "shakshuka.jpg",
+      "sourceUrl": "https://www.instagram.com/p/C8SaturdayPans/",
+      "author": { "name": "demo.saturday.pans", "platform": "instagram", "avatar": "avatar-sat.png" },
+      "ingredients": [
+        { "title": "Sauce", "items": [
+          ["Canned tomatoes", 400, "g", "whole peeled"],
+          ["Red bell pepper", 1, "pcs", "diced"],
+          ["Onion", 1, "pcs", "diced"],
+          ["Garlic", 3, "pcs", "cloves, minced"],
+          ["Cumin", 1, "tsp", null],
+          ["Smoked paprika", 1, "tsp", null],
+          ["Chili flakes", 0.5, "tsp", "or to taste"]
+        ]},
+        { "title": "To finish", "items": [
+          ["Eggs", 4, "pcs", "large"],
+          ["Feta", 50, "g", "crumbled"],
+          ["Parsley", null, null, "to serve"]
+        ]}
+      ],
+      "steps": [
+        { "title": "Make the sauce", "steps": [
+          "Soften onion and pepper in olive oil for 5 minutes.",
+          "Add garlic and spices for 1 minute, then the tomatoes. Simmer 10 minutes."
+        ]},
+        { "title": "Cook the eggs", "steps": [
+          "Make four wells, crack in the eggs, cover and cook on low for 6 minutes.",
+          "Top with feta and parsley and serve with bread."
+        ]}
+      ]
+    },
+    {
+      "title": "Miso Butter Mushroom Udon",
+      "duration": 20, "servings": 2, "daysAgo": 2,
+      "image": "misoudon.jpg",
+      "sourceUrl": "https://www.tiktok.com/@demo.noodle.nights/video/7299876543210987654",
+      "author": { "name": "demo.noodle.nights", "platform": "tiktok", "avatar": "avatar-noodle.png" },
+      "ingredients": [
+        { "title": "", "items": [
+          ["Udon noodles", 400, "g", "frozen"],
+          ["Oyster mushrooms", 250, "g", "torn"],
+          ["Shiitake mushrooms", 100, "g", "sliced"],
+          ["Butter", 40, "g", null],
+          ["White miso", 2, "tbsp", null],
+          ["Soy sauce", 1, "tbsp", null],
+          ["Eggs", 2, "pcs", "soft boiled"],
+          ["Spring onions", 2, "pcs", null]
+        ]}
+      ],
+      "steps": [
+        { "title": "", "steps": [
+          "Sear the mushrooms in a dry hot pan until browned, about 6 minutes.",
+          "Cook the udon for 2 minutes and keep a cup of the water.",
+          "Melt butter with miso and soy, add noodles and a splash of noodle water and toss until glossy.",
+          "Top with mushrooms, halved eggs and spring onions."
+        ]}
+      ]
+    },
+    {
+      "title": "Lemon Ricotta Pancakes",
+      "duration": 25, "servings": 2, "daysAgo": 9,
+      "image": "pancakes.jpg",
+      "sourceUrl": "https://www.instagram.com/p/C7KitchenLea/",
+      "author": { "name": "demo.lea.cooks", "platform": "instagram", "avatar": "avatar-lea.png" },
+      "ingredients": [
+        { "title": "", "items": [
+          ["Ricotta", 250, "g", null],
+          ["Eggs", 3, "pcs", "separated"],
+          ["Flour", 90, "g", null],
+          ["Milk", 120, "mL", null],
+          ["Sugar", 1, "tbsp", null],
+          ["Lemon", 1, "pcs", "zest and a squeeze of juice"],
+          ["Blueberries", 125, "g", null],
+          ["Maple syrup", null, null, "to serve"]
+        ]}
+      ],
+      "steps": [
+        { "title": "", "steps": [
+          "Mix ricotta, yolks, milk, sugar and lemon zest, then fold in the flour.",
+          "Whisk the whites to soft peaks and fold them through.",
+          "Cook small pancakes in a buttered pan, 2 minutes a side.",
+          "Stack with blueberries and maple syrup."
+        ]}
+      ]
+    },
+    {
+      "title": "Smash Burger Tacos",
+      "duration": 25, "servings": 4, "daysAgo": 4,
+      "image": "smashtacos.jpg",
+      "sourceUrl": "https://www.tiktok.com/@demo.mira.cooks/video/7298765432109876543",
+      "author": { "name": "demo.mira.cooks", "platform": "tiktok", "avatar": "avatar-mira.png" },
+      "ingredients": [
+        { "title": "Tacos", "items": [
+          ["Ground beef", 500, "g", "20% fat"],
+          ["Small flour tortillas", 8, "pcs", null],
+          ["Cheddar", 8, "pcs", "slices"],
+          ["Iceberg lettuce", null, null, "shredded"],
+          ["Pickles", null, null, "sliced"]
+        ]},
+        { "title": "Sauce", "items": [
+          ["Mayonnaise", 3, "tbsp", null],
+          ["Ketchup", 1, "tbsp", null],
+          ["Mustard", 1, "tsp", null],
+          ["Pickle juice", 1, "tsp", null]
+        ]}
+      ],
+      "steps": [
+        { "title": "", "steps": [
+          "Mix the sauce and set aside.",
+          "Press a thin layer of beef onto each tortilla and season with salt.",
+          "Cook beef side down in a hot pan for 3 minutes, flip, add cheese and cook 1 minute.",
+          "Fill with lettuce, pickles and sauce."
+        ]}
+      ]
+    }
+  ]
+}

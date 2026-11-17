@@ -1,0 +1,29 @@
+[
+ {
+  "shape": "app showcase",
+  "theme": "custom",
+  "axes": "light/grotesk-sans/cool",
+  "hero": "centred portrait, role, one line, two actions",
+  "nav": "sticky bar, name left, sections and language right",
+  "footer": "copyright and picture credits",
+  "imagery": "product: real app screens in Apple bezel, one portrait",
+  "photos": [
+   "portrait-wall (fal edit of the owner)"
+  ],
+  "entry": "none beyond hero rise",
+  "fingerprint": "tiles-left device-right",
+  "sections": [
+   "hero",
+   "myrecipal",
+   "reviewradar",
+   "web",
+   "experience",
+   "contact"
+  ],
+  "signature": "MyReciPal iPhone you can tap through",
+  "waived": [],
+  "prompt": "portfolio for an iOS and full-stack developer",
+  "date": "2026-11-17",
+  "mode": "build"
+ }
+]
