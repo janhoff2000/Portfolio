@@ -41,3 +41,5 @@
 - Still open: the studio headshot file, du or Sie, the MyReciPal start date, whether hokmajewelry.com should appear, a CV PDF, and a recapture of the creator handles if real ones are wanted.
 - Café section (2026-11-17): the MacBook frame the user sent (screen at 217,144 sized 1566x1028, notch reaching y=184) and the iPhone 18 Pro bezel, composited with fresh captures of cafepiedralipe.co (desktop 1440x908 @2x, mobile 402x812 @3x, white status bar). The two sit side by side at real relative scale with no overlap or shadow. On phones only the iPhone shows, at 210px wide, to keep devices at least 200px tall.
 - The portrait is now an unedited crop of IMG_1630 (public/images/portrait/jan.webp). The AI portraits are parked in explore/originals/ai-portraits; never use them.
+- Café iPhone (2026-11-18): recaptured in the iPhone 18 Pro Simulator with real Safari (status bar 9:41, full battery), masked with the bezel's own screen shape so the corners match. The MyReciPal demo's corner radius is now 16.5%/7.6%, measured from the bezel.
+- Portrait (2026-11-18): a real crop of the user's suit photo (explore/source-photos/suit-original.jpg), cropped to Jan only. No AI.

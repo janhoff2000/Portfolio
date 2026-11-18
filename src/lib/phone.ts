@@ -64,6 +64,9 @@ export class MyReciPalPhone {
   private toast: HTMLElement
   private ro: ResizeObserver
   private toastTimer = 0
+  private demoRunning = false
+  private touch: HTMLElement
+  private demoStopped = false
 
   constructor(root: HTMLElement, opts: PhoneOptions) {
     this.root = root
@@ -100,6 +103,12 @@ export class MyReciPalPhone {
       tabbar.appendChild(b)
     }
 
+    // The touch indicator iOS shows in screen recordings, used only by the demo.
+    this.touch = document.createElement('div')
+    this.touch.className = 'mrp-touch'
+    this.touch.setAttribute('aria-hidden', 'true')
+    root.appendChild(this.touch)
+
     this.toast = document.createElement('div')
     this.toast.className = 'mrp-toast'
     this.toast.setAttribute('role', 'status')
@@ -110,8 +119,86 @@ export class MyReciPalPhone {
     this.ro.observe(root)
     size()
 
+    // A visitor's own touch ends the demo for good and hands over control.
+    for (const type of ['pointerdown', 'wheel', 'touchstart', 'keydown']) {
+      root.addEventListener(type, () => { this.demoStopped = true }, { capture: true, passive: true })
+    }
+
     this.open('home', 'cookbook')
     this.updateTab()
+  }
+
+  /** Plays once: a touch switches to Recipes, opens a recipe, scrolls it, goes back. Uses only the app's own states. */
+  async demo() {
+    if (this.reduce || this.demoRunning || this.demoStopped) return
+    this.demoRunning = true
+    const wait = (ms: number) => new Promise((r) => window.setTimeout(r, ms))
+    const live = () => !this.demoStopped
+    const top = () => this.stack[this.stack.length - 1]
+    const w = () => this.root.clientWidth
+    const h = () => this.root.clientHeight
+    const t = this.touch
+    const moveTo = (x: number, y: number, ms = 480) => {
+      t.style.transitionDuration = `${ms}ms, 200ms`
+      t.style.setProperty('--tx', `${x}px`)
+      t.style.setProperty('--ty', `${y}px`)
+    }
+    const target = (label: string) => [...top().querySelectorAll<HTMLButtonElement>('.mrp-hot')].find((x) => x.getAttribute('aria-label') === label)
+    const tap = async (label: string, yFrac = 0.5) => {
+      const b = target(label)
+      if (!b || !live()) return false
+      const r = b.getBoundingClientRect()
+      const R = this.root.getBoundingClientRect()
+      moveTo(r.left - R.left + r.width / 2, r.top - R.top + r.height * yFrac)
+      await wait(560)
+      if (!live()) return false
+      t.style.transitionDuration = '120ms, 200ms'
+      t.classList.add('down')
+      b.classList.add('pressing')
+      await wait(200)
+      t.classList.remove('down')
+      b.classList.remove('pressing')
+      if (!live()) return false
+      b.click()
+      return true
+    }
+    const drag = async (from: number, to: number, scrollTop: number) => {
+      moveTo(w() * 0.55, h() * from)
+      await wait(520)
+      if (!live()) return false
+      t.style.transitionDuration = '120ms, 200ms'
+      t.classList.add('down')
+      await wait(140)
+      moveTo(w() * 0.55, h() * to, 700)
+      top().scrollTo({ top: scrollTop, behavior: 'smooth' })
+      await wait(720)
+      t.classList.remove('down')
+      return live()
+    }
+    const u = w() / W
+    try {
+      moveTo(w() * 0.5, h() * 0.78, 0)
+      await wait(500)
+      if (!live()) return
+      t.classList.add('on')
+      await wait(300)
+      if (top()?.dataset.id === 'home') {
+        if (!(await tap('Recipes'))) return
+        await wait(900)
+      }
+      if (!(await tap('Crispy Gochujang Chicken', 0.35))) return
+      await wait(1100)
+      if (!(await drag(0.72, 0.38, 300 * u))) return
+      await wait(700)
+      if (!(await drag(0.38, 0.72, 0))) return
+      await wait(500)
+      await tap('Back')
+      await wait(600)
+    } finally {
+      t.classList.remove('on', 'down')
+      this.demoRunning = false
+      this.demoStopped = true
+    }
   }
 
   destroy() {

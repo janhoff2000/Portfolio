@@ -4,7 +4,7 @@ export type Lang = 'en' | 'de'
 
 const en = {
   metaTitle: 'Jan Hoffmann, junior iOS and full-stack developer',
-  metaDescription: 'Jan Hoffmann, iOS and full-stack developer in Münster. Try MyReciPal and ReviewRadar right on the page.',
+  metaDescription: 'Jan Hoffmann, iOS and full-stack developer, open to remote roles. Try MyReciPal and ReviewRadar right on the page.',
   navMrp: 'MyReciPal',
   navRr: 'ReviewRadar',
   navWeb: 'Web',
@@ -12,7 +12,7 @@ const en = {
   navContact: 'Contact',
   langLabel: 'Language',
 
-  heroTitle: 'Junior iOS and full‑stack developer in Münster.',
+  heroTitle: 'Junior iOS and full‑stack developer.',
   heroSentence: "I work on CHECK24's hotel comparison app, used by millions. These two are mine.",
   mail: 'Email me',
   linkedin: 'LinkedIn',
@@ -60,10 +60,16 @@ const en = {
   webAltPhone: 'cafepiedralipe.co on an iPhone',
 
   expTitle: 'Three years at CHECK24.',
-  expLede: 'From apprentice to iOS to full stack in three years, newest first.',
+  expLede: 'From apprentice to iOS to full stack in three years.',
 
-  contactTitle: 'Looking for a junior role in iOS or full stack, fully remote.',
-  contactSentence: 'Based in Münster, working on CET. English or German.',
+  contactTitle: 'Open to junior roles in iOS or full stack, ideally remote.',
+  contactSentence: 'At home in European time zones, and happy to overlap with a team anywhere in the world. English or German.',
+  contactSetupLabel: 'How I like to work',
+  contactSetup: ['Full remote preferred', 'European time zones', 'Worldwide teams welcome'],
+  github: 'GitHub',
+  impressum: 'Impressum',
+  privacy: 'Privacy',
+  legalBack: '← Back to the portfolio',
   credits: 'Recipes, creators and food photos in the MyReciPal screens are samples. The food photos and the creator avatars were generated with fal.ai. Device images: Apple.',
 }
 
@@ -71,7 +77,7 @@ export type Strings = typeof en
 
 const de: Strings = {
   metaTitle: 'Jan Hoffmann, Junior iOS- und Full-Stack-Entwickler',
-  metaDescription: 'Jan Hoffmann, iOS- und Full-Stack-Entwickler in Münster. MyReciPal und ReviewRadar direkt auf der Seite ausprobieren.',
+  metaDescription: 'Jan Hoffmann, iOS- und Full-Stack-Entwickler, offen für Remote-Stellen. MyReciPal und ReviewRadar direkt auf der Seite ausprobieren.',
   navMrp: 'MyReciPal',
   navRr: 'ReviewRadar',
   navWeb: 'Web',
@@ -79,7 +85,7 @@ const de: Strings = {
   navContact: 'Kontakt',
   langLabel: 'Sprache',
 
-  heroTitle: 'Junior iOS- und Full‑Stack‑Entwickler aus Münster.',
+  heroTitle: 'Junior iOS- und Full‑Stack‑Entwickler.',
   heroSentence: 'Ich arbeite an der Hotelvergleichs-App von CHECK24 mit Millionen Nutzern. Diese zwei sind meine.',
   mail: 'E-Mail schreiben',
   linkedin: 'LinkedIn',
@@ -93,7 +99,7 @@ const de: Strings = {
     ['Sync in beide Richtungen', 'Laravel und PostgreSQL, Konflikte löst die Version.'],
     ['Import auf dem Gerät', 'Foundation Models, Server als Fallback.'],
     ['Import im Hintergrund', 'Ein LLM extrahiert das Rezept; eine Mitteilung meldet das fertige Rezept.'],
-    ['Share Extension', 'Direkt aus Instagram oder TikTok speichern.'],
+    ['Share Extension', 'Direkt aus sozialen Medien oder von jeder Website speichern.'],
   ],
   mrpLimit: 'Stehen die Schritte nur im Video, erfindet die App keine.',
   mrpBeta: 'MyReciPal-Beta beitreten',
@@ -127,10 +133,16 @@ const de: Strings = {
   webAltPhone: 'cafepiedralipe.co auf einem iPhone',
 
   expTitle: 'Drei Jahre bei CHECK24.',
-  expLede: 'Vom Azubi über iOS bis Full Stack in drei Jahren, das Neueste zuerst.',
+  expLede: 'Vom Azubi über iOS bis Full Stack in drei Jahren.',
 
-  contactTitle: 'Offen für eine Junior-Stelle in iOS oder Full Stack, komplett remote.',
-  contactSentence: 'Aus Münster, Zeitzone MEZ. Auf Deutsch oder Englisch.',
+  contactTitle: 'Offen für Junior-Stellen in iOS oder Full Stack, am liebsten remote.',
+  contactSentence: 'Zu Hause in europäischen Zeitzonen und gern im Takt mit einem Team irgendwo auf der Welt. Auf Deutsch oder Englisch.',
+  contactSetupLabel: 'So arbeite ich am liebsten',
+  contactSetup: ['Komplett remote bevorzugt', 'Europäische Zeitzonen', 'Teams weltweit willkommen'],
+  github: 'GitHub',
+  impressum: 'Impressum',
+  privacy: 'Datenschutz',
+  legalBack: '← Zurück zum Portfolio',
   credits: 'Rezepte, Creator und Food-Fotos in den MyReciPal-Screens sind Beispiele. Food-Fotos und Creator-Avatare wurden mit fal.ai erzeugt. Gerätebilder: Apple.',
 }
 

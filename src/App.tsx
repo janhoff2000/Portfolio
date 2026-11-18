@@ -4,22 +4,24 @@ import { Icon, type IconName } from './components/icons'
 import { Phone } from './components/Phone'
 import { ReviewRadarPanel } from './components/ReviewRadarPanel'
 import { Timeline } from './components/Timeline'
+import { Legal, LEGAL_PATHS, legalPageFor, type LegalPage } from './components/Legal'
+import { CONTACT } from './data/contact'
 
-const EMAIL = 'me@jandavidhoffmann.com'
-const LINKEDIN = 'https://www.linkedin.com/in/jan-hoffmann-1a473022a'
+const EMAIL = CONTACT.email
+const LINKEDIN = CONTACT.linkedin
 
 function Nav() {
   const { t, lang, setLang } = useLang()
   return (
     <header className="nav">
       <div className="container nav-row">
-        <a className="nav-name" href="#top">Jan Hoffmann</a>
+        <a className="nav-name" href="/#top">Jan Hoffmann</a>
         <nav className="nav-links" aria-label="Sections">
-          <a href="#myrecipal">{t.navMrp}</a>
-          <a href="#reviewradar">{t.navRr}</a>
-          <a href="#web">{t.navWeb}</a>
-          <a href="#experience">{t.navExp}</a>
-          <a href="#contact">{t.navContact}</a>
+          <a href="/#myrecipal">{t.navMrp}</a>
+          <a href="/#reviewradar">{t.navRr}</a>
+          <a href="/#web">{t.navWeb}</a>
+          <a href="/#experience">{t.navExp}</a>
+          <a href="/#contact">{t.navContact}</a>
         </nav>
         <div className="lang" role="group" aria-label={t.langLabel}>
           {(['en', 'de'] as Lang[]).map((l) => (
@@ -36,7 +38,7 @@ function Hero() {
   return (
     <section className="hero container" id="top" aria-labelledby="hero-title">
       <div className="portrait" data-slot="portrait" data-alt="Head-and-shoulders photo of Jan, facing the camera">
-        <img src="/images/portrait/jan.webp" width={480} height={480} alt={t.portraitAlt} />
+        <img src="/images/portrait/jan.webp" width={270} height={270} alt={t.portraitAlt} />
       </div>
       <h1 id="hero-title">{t.heroTitle}</h1>
       <p className="hero-sentence">{t.heroSentence}</p>
@@ -74,8 +76,8 @@ function Tiles({ items, icons }: { items: [string, string][]; icons: IconName[] 
   )
 }
 
-function Chips({ items }: { items: string[] }) {
-  return <ul className="chips" aria-label="Stack">{items.map((c) => <li key={c}>{c}</li>)}</ul>
+function Chips({ items, label = 'Stack' }: { items: string[]; label?: string }) {
+  return <ul className="chips" aria-label={label}>{items.map((c) => <li key={c}>{c}</li>)}</ul>
 }
 
 function Project({ id, tone, alt, head, children, aside }: { id: string; tone: 'mrp' | 'rr'; alt?: boolean; head: ReactNode; children: ReactNode; aside: ReactNode }) {
@@ -90,7 +92,36 @@ function Project({ id, tone, alt, head, children, aside }: { id: string; tone: '
   )
 }
 
-function Page() {
+function Footer() {
+  const { t } = useLang()
+  return (
+    <footer className="footer">
+      <div className="container">
+        <p>© 2026 Jan Hoffmann</p>
+        <p data-credits>{t.credits}</p>
+        <p className="footer-links">
+          <a href={LEGAL_PATHS.impressum}>{t.impressum}</a>
+          <a href={LEGAL_PATHS.privacy}>{t.privacy}</a>
+        </p>
+      </div>
+    </footer>
+  )
+}
+
+function Page({ legal }: { legal: LegalPage | null }) {
+  if (legal) {
+    return (
+      <>
+        <Nav />
+        <main><Legal page={legal} /></main>
+        <Footer />
+      </>
+    )
+  }
+  return <Portfolio />
+}
+
+function Portfolio() {
   const { t } = useLang()
   return (
     <>
@@ -104,7 +135,7 @@ function Page() {
           <p className="lede">{t.mrpLede}</p>
         </>}>
           <Tiles items={t.mrpTiles} icons={['offline', 'sync', 'spark', 'cloud', 'share']} />
-          <Chips items={['SwiftUI', 'SwiftData', 'Foundation Models', 'Laravel', 'PostgreSQL']} />
+          <Chips items={['SwiftUI', 'SwiftData', 'Foundation Models', 'Laravel', 'PostgreSQL', 'Xcode Cloud', 'GitHub Actions', 'TestFlight']} />
           <a className="btn primary" href="https://testflight.apple.com/join/MbgnEzdk">{t.mrpBeta}</a>
         </Project>
 
@@ -114,7 +145,7 @@ function Page() {
           <p className="lede">{t.rrLede}</p>
         </>}>
           <Tiles items={t.rrTiles} icons={['people', 'doc', 'bell']} />
-          <Chips items={['Swift', 'SwiftUI', 'Foundation Models', 'GitHub API', 'Bitbucket API', 'Jira API']} />
+          <Chips items={['Swift', 'SwiftUI', 'Foundation Models', 'GitHub API', 'Bitbucket API', 'Jira API', 'Xcode Cloud', 'TestFlight']} />
           <a className="btn primary" href="https://testflight.apple.com/join/aDbNgHKU">{t.rrBeta}</a>
         </Project>
 
@@ -147,26 +178,24 @@ function Page() {
           <div className="container contact-inner">
             <h2 id="contact-title">{t.contactTitle}</h2>
             <p className="lede">{t.contactSentence}</p>
+            <Chips items={t.contactSetup} label={t.contactSetupLabel} />
             <div className="actions">
               <a className="btn primary" href={`mailto:${EMAIL}`}>{t.mail}</a>
               <a className="btn quiet" href={LINKEDIN}>{t.linkedin}</a>
+              <a className="btn quiet" href={CONTACT.github}>{t.github}</a>
             </div>
             <p className="contact-address"><a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
           </div>
         </section>
       </main>
-      <footer className="footer">
-        <div className="container">
-          <p>© 2026 Jan Hoffmann</p>
-          <p data-credits>{t.credits}</p>
-        </div>
-      </footer>
+      <Footer />
     </>
   )
 }
 
 export default function App() {
   const [lang, setLangState] = useState<Lang>(initialLang)
+  const legal = legalPageFor(location.pathname)
   const value = useMemo(() => ({
     lang,
     t: strings[lang],
@@ -178,13 +207,21 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.lang = lang
-    document.title = strings[lang].metaTitle
+    const t = strings[lang]
+    document.title = legal ? `${legal === 'impressum' ? t.impressum : t.privacy} · Jan Hoffmann` : t.metaTitle
     document.querySelector('meta[name="description"]')?.setAttribute('content', strings[lang].metaDescription)
-  }, [lang])
+  }, [lang, legal])
+
+  // The page renders after the browser looks for #anchors, so jump to one once mounted.
+  useEffect(() => {
+    const id = decodeURIComponent(location.hash.slice(1))
+    // Instant: the page-wide smooth scroll gets cancelled while the page is still loading.
+    if (id) document.getElementById(id)?.scrollIntoView({ block: 'start', behavior: 'instant' })
+  }, [])
 
   return (
     <LangContext.Provider value={value}>
-      <Page />
+      <Page legal={legal} />
     </LangContext.Provider>
   )
 }

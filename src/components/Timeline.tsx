@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { flushSync } from 'react-dom'
 import { timeline, type Entry, type Kind } from '../data/timeline'
 import { useLang, type Lang } from '../i18n'
 
@@ -31,6 +32,18 @@ export function Timeline() {
   const [filter, setFilter] = useState<Filter>('all')
   const [open, setOpen] = useState<Set<number>>(new Set())
 
+  // Switching filters morphs the pill and lets entries fade out or glide into place (View Transitions).
+  // Browsers without them, and reduced motion, switch instantly.
+  const choose = (f: Filter) => {
+    if (f === filter) return
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduce || !document.startViewTransition) {
+      setFilter(f)
+      return
+    }
+    document.startViewTransition(() => flushSync(() => setFilter(f)))
+  }
+
   const toggle = (i: number) => setOpen((s) => {
     const n = new Set(s)
     if (n.has(i)) n.delete(i)
@@ -42,7 +55,10 @@ export function Timeline() {
     <div className="tl-wrap">
       <div className="tl-chips" role="group" aria-label={u.filter}>
         {(['all', 'work', 'edu'] as Filter[]).map((f) => (
-          <button key={f} type="button" className="tl-chip" aria-pressed={filter === f} onClick={() => setFilter(f)}>{u[f]}</button>
+          <button key={f} type="button" className="tl-chip" aria-pressed={filter === f} onClick={() => choose(f)} style={{ viewTransitionName: `tl-chip-${f}` }}>
+            {filter === f && <span className="tl-chip-pill" aria-hidden="true" />}
+            <span className="tl-chip-label">{u[f]}</span>
+          </button>
         ))}
       </div>
       <ol className="tl">
@@ -52,9 +68,9 @@ export function Timeline() {
           const showYear = k === 0 || yearOf(shown[k - 1].e) !== y
           const many = c.points.length > 0
           const isOpen = open.has(i)
-          const points = isOpen ? c.points : []
+          const detailId = `tl-detail-${i}`
           return (
-            <li key={i} className={`tl-item k-${e.kind}`}>
+            <li key={i} className={`tl-item k-${e.kind}`} style={{ viewTransitionName: `tl-item-${i}` }}>
               <div className="tl-year" aria-hidden={!showYear}>{showYear ? y : ''}</div>
               <div className="tl-node" aria-hidden="true" />
               <article className="tl-body">
@@ -68,8 +84,12 @@ export function Timeline() {
                   {e.link ? <a href={e.link} {...(e.external ? { target: '_blank', rel: 'noopener' } : {})}>{c.title}</a> : c.title}
                 </h3>
                 <p className="tl-org">{c.org}</p>
-                {points.length > 0 && <ul className="tl-points">{points.map((p) => <li key={p}>{p}</li>)}</ul>}
-                {many && <button type="button" className="tl-more" aria-expanded={isOpen} onClick={() => toggle(i)}>{isOpen ? u.less : u.more}</button>}
+                {many && (
+                  <div className="tl-detail" id={detailId} data-open={isOpen} inert={!isOpen} aria-hidden={!isOpen}>
+                    <ul className="tl-points">{c.points.map((p) => <li key={p}>{p}</li>)}</ul>
+                  </div>
+                )}
+                {many && <button type="button" className="tl-more" aria-expanded={isOpen} aria-controls={detailId} onClick={() => toggle(i)}>{isOpen ? u.less : u.more}</button>}
                 {e.tags && <ul className="tl-tags">{e.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>}
               </article>
             </li>

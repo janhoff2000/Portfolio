@@ -16,7 +16,7 @@ export type Entry = {
 
 export const timeline: Entry[] = [
   {
-    kind: 'work', from: '2026-06', to: null, current: true, tags: ['React', 'TypeScript', 'Go', 'Grafana', 'WebViews'],
+    kind: 'work', from: '2026-06', to: null, current: true, tags: ['React', 'TypeScript', 'Go', 'Grafana', 'WebViews', 'Jenkins', 'Jira', 'Kanban'],
     en: {
       title: 'Junior Software Developer, Full Stack', org: 'CHECK24 Hotel, Münster', points: [
         'Moved from iOS to full stack three months before the launch of the rewritten hotel comparison, on a team of about 26. Live since October 2026, with higher conversion.',
@@ -39,7 +39,7 @@ export const timeline: Entry[] = [
     },
   },
   {
-    kind: 'work', from: '2025-07', to: '2026-05', tags: ['Swift', 'SwiftUI', 'UIKit', 'PHP', 'Sentry'],
+    kind: 'work', from: '2025-07', to: '2026-05', tags: ['Swift', 'SwiftUI', 'UIKit', 'PHP', 'Sentry', 'Jenkins', 'Jira', 'Kanban'],
     en: {
       title: 'Junior Software Developer, iOS', org: 'CHECK24 Hotel, Münster', points: [
         'Built and improved features for a large-scale iOS app used by millions.',
@@ -58,7 +58,7 @@ export const timeline: Entry[] = [
     },
   },
   {
-    kind: 'work', from: '2023-08', to: '2025-06', tags: ['Swift', 'iOS', 'PHP'],
+    kind: 'work', from: '2023-08', to: '2025-06', tags: ['Swift', 'iOS', 'PHP', 'Jenkins', 'Jira', 'Kanban'],
     en: {
       title: 'Apprentice, Software Development', org: 'CHECK24 Hotel, Münster', points: [
         'Final IHK project: an Express Checkout across iOS and middleware, from concept to documentation.',
@@ -75,12 +75,12 @@ export const timeline: Entry[] = [
     },
   },
   {
-    kind: 'edu', from: '2023', to: '2025',
+    kind: 'edu', from: '2023', to: '2025', tags: ['Java'],
     en: { title: 'Certified Application Developer (Fachinformatiker, IHK)', org: 'Ludwig Erhard Berufskolleg, Münster', points: [] },
     de: { title: 'Fachinformatiker für Anwendungsentwicklung (IHK)', org: 'Ludwig-Erhard-Berufskolleg, Münster', points: [] },
   },
   {
-    kind: 'edu', from: '2020', to: '2023',
+    kind: 'edu', from: '2020', to: '2023', tags: ['Java', 'C', 'Python'],
     en: { title: 'Computer Science, no degree', org: 'FH Münster', points: [] },
     de: { title: 'Informatik, ohne Abschluss', org: 'FH Münster', points: [] },
   },

@@ -6,7 +6,7 @@
   --text-section: clamp(2rem, 2.6vw + 0.75rem, 2.875rem);
   --text-title: 1rem; --text-lead: clamp(1.125rem, 0.4vw + 1rem, 1.375rem);
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-micro: 120ms; --dur-short: 200ms; --dur-push: 420ms; --dur-long: 700ms;
+  --dur-micro: 120ms; --dur-short: 200ms; --dur-close: 220ms; --dur-open: 320ms; --dur-push: 420ms; --dur-long: 700ms;
   --container: 1120px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 96px; --section-gap: 120px; --section-gap-l: 144px;
   --z-base: 1; --z-raised: 10; --z-sticky-nav: 300; --z-toast: 500;
 
@@ -22,6 +22,9 @@
   --color-focus: oklch(0.52 0.17 255);
   --color-mrp: oklch(0.53 0.16 40);
   --color-wash: oklch(0.235 0.004 286 / 0.05);
+  --color-press: oklch(0 0 0 / 0.16);
+  --color-touch: oklch(0.55 0 0 / 0.45);
+  --color-touch-ring: oklch(1 0 0 / 0.85);
   --color-nav: oklch(0.988 0.002 286 / 0.82);
   --color-app-paper: oklch(0.97 0.012 75);
   --color-toast: oklch(0.2 0.004 286 / 0.88);
@@ -34,6 +37,7 @@
 
   --radius-card: 18px; --radius-panel: 14px; --radius-chip: 8px; --radius-pill: 999px;
   --rule-hair: 1px;
+  --nav-height: 52px;
   --shadow-card: 0 0 0 1px oklch(0 0 0 / 0.06);
   --shadow-panel: 0 30px 70px oklch(0 0 0 / 0.16), 0 0 0 1px oklch(0 0 0 / 0.08);
   --shadow-push: -10px 0 30px oklch(0 0 0 / 0.12);
